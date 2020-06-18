@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
 import "../index.css";
 
 class NavBar extends Component {
