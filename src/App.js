@@ -4,7 +4,13 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    users: [{ id: "0000001", name: "Jack Schwarz" }],
+    users: [
+      {
+        id: "0000001",
+        name: "Jack Schwarz",
+        userName: "Jack58",
+      },
+    ],
   };
 
   render() {
