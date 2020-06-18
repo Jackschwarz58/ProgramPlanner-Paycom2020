@@ -2,15 +2,18 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
+import "../index.css";
 
 class NavBar extends Component {
   render() {
     const dropdownStyle = {
       fontSize: ".7em",
-      marginLeft: ".2em",
+      marginLeft: ".5em",
     };
     const titleStyle = {
-      fontSize: "4em",
+      fontSize: "3em",
+      color: "#02BE63",
+      fontWeight: "500",
     };
 
     const profileStyle = {
@@ -18,14 +21,14 @@ class NavBar extends Component {
     };
 
     const navItemStyle = {
-      fontSize: "2em",
+      fontSize: "1.15em",
     };
 
     return (
       <div className="conatiner-fluid">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 py-3">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light px-4 py-3 shadow">
           <a className="navbar-brand" style={titleStyle} href="#">
-            My Event
+            Paycom Summer Program
           </a>
           <button
             className="navbar-toggler"
@@ -40,26 +43,31 @@ class NavBar extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item" style={navItemStyle}>
-                <a className="nav-link">
-                  <FontAwesomeIcon icon={faCalendarPlus} />
-                  <span class="sr-only">(current)</span>
-                </a>
+            <ul className="navbar-nav ml-auto mr-5">
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-light"
+                  style={navItemStyle}
+                >
+                  <a className="nav-link">
+                    <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
+                  </a>
+                </button>
               </li>
             </ul>
-            <div className="ml-5">
+            <div>
               <a className="navbar-brand" href="#">
                 <img
                   className="navbar-img"
                   style={profileStyle}
                   src={`../assets/${this.props.user.id}-profile.jpg`}
-                  width="40"
-                  height="40"
+                  width="38"
+                  height="38"
                   alt=""
                   loading="lazy"
                 />
-                <span style={dropdownStyle}>&#9660;</span>
+                <span style={dropdownStyle}>{this.props.user.userName}</span>
               </a>
             </div>
           </div>
