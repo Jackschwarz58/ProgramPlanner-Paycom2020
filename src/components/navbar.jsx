@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
-import "../assets/css/navbar.css";
 
 class NavBar extends Component {
   render() {
@@ -13,11 +12,20 @@ class NavBar extends Component {
     const titleStyle = {
       fontSize: "4em",
     };
+
+    const profileStyle = {
+      borderRadius: "50%",
+    };
+
+    const navItemStyle = {
+      fontSize: "2em",
+    };
+
     return (
-      <div className="m-3">
-        <nav className="navbar navbar-expand-lg navbar-light bg-white">
+      <div className="conatiner-fluid">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 py-3">
           <a className="navbar-brand" style={titleStyle} href="#">
-            [Event Name]
+            My Event
           </a>
           <button
             className="navbar-toggler"
@@ -32,31 +40,19 @@ class NavBar extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item" style={navItemStyle}>
                 <a className="nav-link">
                   <FontAwesomeIcon icon={faCalendarPlus} />
+                  <span class="sr-only">(current)</span>
                 </a>
               </li>
             </ul>
-            <div className="ml-auto right-navbar">
-              {/* <form className="form-inline my-2 my-lg-0 ml-auto">
-                <input
-                  className="form-control mr-sm-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button
-                  className="btn btn-outline-success my-2 my-sm-0"
-                  type="submit"
-                >
-                  Search
-                </button>
-              </form> */}
+            <div className="ml-5">
               <a className="navbar-brand" href="#">
                 <img
                   className="navbar-img"
+                  style={profileStyle}
                   src={`../assets/${this.props.user.id}-profile.jpg`}
                   width="40"
                   height="40"
