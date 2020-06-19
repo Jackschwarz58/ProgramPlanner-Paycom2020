@@ -12,7 +12,6 @@ class NavBar extends Component {
     };
     const titleStyle = {
       fontSize: "3em",
-      color: "#02BE63",
       fontWeight: "500",
     };
 
@@ -21,14 +20,15 @@ class NavBar extends Component {
     };
 
     const navItemStyle = {
-      fontSize: "1.15em",
+      fontSize: "1.25em",
+      fontWeight: "500",
     };
 
     return (
       <div className="conatiner-fluid">
-        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light px-4 py-3 shadow">
-          <a className="navbar-brand" style={titleStyle} href="#">
-            Paycom Summer Program
+        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-success px-5 py-3 shadow-sm">
+          <a className="navbar-brand text-white" style={titleStyle} href="#">
+            Summer Book Club 2k20 - Social Distancing Edition
           </a>
           <button
             className="navbar-toggler"
@@ -47,10 +47,10 @@ class NavBar extends Component {
               <li className="nav-item">
                 <button
                   type="button"
-                  className="btn btn-light"
+                  className="btn btn-success"
                   style={navItemStyle}
                 >
-                  <a className="nav-link">
+                  <a className="nav-link text-white">
                     <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
                   </a>
                 </button>
@@ -67,7 +67,9 @@ class NavBar extends Component {
                   alt=""
                   loading="lazy"
                 />
-                <span style={dropdownStyle}>{this.props.user.userName}</span>
+                <span className="text-white" style={dropdownStyle}>
+                  {this.props.user.userName}
+                </span>
               </a>
             </div>
           </div>
