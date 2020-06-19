@@ -11,6 +11,11 @@
 # production
 /build
 
+# assets
+
+/public/assets/2-profile.jpg
+/public/assets/3-profile.jpg
+
 # misc
 .DS_Store
 .env.local
