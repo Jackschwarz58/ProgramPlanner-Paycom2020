@@ -26,7 +26,7 @@ class NavBar extends Component {
 
     return (
       <div className="conatiner-fluid">
-        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light px-4 py-3 shadow">
+        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light px-4 py-3 shadow">
           <a className="navbar-brand" style={titleStyle} href="#">
             Paycom Summer Program
           </a>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import "./App.css";
+import SessionCard from "./components/sessionCard";
 
 class App extends Component {
   state = {
@@ -17,6 +18,25 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar user={this.state.users[0]} />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
       </React.Fragment>
     );
   }
