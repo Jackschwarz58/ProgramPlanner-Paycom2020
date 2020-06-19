@@ -5,9 +5,9 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 class SessionCard extends Component {
   state = {};
   render() {
-    const { title, date, desc, attendeeCount } = this.props;
+    const { id, title, date, desc, attendeeCount } = this.props;
     return (
-      <div className="container bg-light my-4 p-3 rounded shadow">
+      <div className="container bg-light my-4 p-3 rounded shadow-sm">
         <div className="row">
           <div className="col col-10">
             <h2>{title}</h2>
@@ -22,6 +22,10 @@ class SessionCard extends Component {
               <button
                 type="button"
                 className="btn btn-light float-right text-danger"
+                onClick={() => {
+                  window.confirm("Is it okay to delete the session?") &&
+                    this.props.onDelete(id);
+                }}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
