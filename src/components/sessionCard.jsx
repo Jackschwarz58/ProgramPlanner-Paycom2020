@@ -6,7 +6,7 @@ class SessionCard extends Component {
   state = {};
   render() {
     return (
-      <div className="container bg-light my-3 p-3 rounded shadow-sm">
+      <div className="container bg-light my-4 p-3 rounded shadow">
         <div className="row">
           <div className="col col-10">
             <h2>Online Learning Book Discussion</h2>
