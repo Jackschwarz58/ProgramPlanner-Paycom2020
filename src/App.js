@@ -19,6 +19,7 @@ class App extends Component {
       <React.Fragment>
         <NavBar user={this.state.users[0]} />
         <SessionCard />
+        <SessionCard />
       </React.Fragment>
     );
   }
