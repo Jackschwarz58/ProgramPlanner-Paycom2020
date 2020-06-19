@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
-import "../index.css";
 
 class NavBar extends Component {
   render() {
@@ -17,6 +16,7 @@ class NavBar extends Component {
 
     const profileStyle = {
       borderRadius: "50%",
+      border: "1px solid white",
     };
 
     const navItemStyle = {
@@ -26,9 +26,9 @@ class NavBar extends Component {
 
     return (
       <div className="conatiner-fluid">
-        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-success px-5 py-3 shadow-sm">
+        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-success px-4 py-3 shadow">
           <a className="navbar-brand text-white" style={titleStyle} href="#">
-            Summer Book Club 2k20 - Social Distancing Edition
+            Summer Book Club 2k20
           </a>
           <button
             className="navbar-toggler"
@@ -64,7 +64,7 @@ class NavBar extends Component {
                   src={`../assets/${this.props.user.id}-profile.jpg`}
                   width="38"
                   height="38"
-                  alt=""
+                  alt="??"
                   loading="lazy"
                 />
                 <span className="text-white" style={dropdownStyle}>
