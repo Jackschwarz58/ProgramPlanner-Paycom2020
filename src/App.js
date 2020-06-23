@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import "./App.css";
 import CardContainer from "./components/cardContainer";
+import SideBar from "./components/sidebar";
 
 class App extends Component {
   state = {
@@ -60,11 +61,14 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar user={this.state.users[0]} />
-        <CardContainer
-          sessionCards={this.state.sessions}
-          onDelete={this.handleDelete}
-        />
+        <SideBar />
+        <div id="wrapper">
+          {/* <NavBar user={this.state.users[0]} />*/}
+          <CardContainer
+            sessionCards={this.state.sessions}
+            onDelete={this.handleDelete}
+          />
+        </div>
       </React.Fragment>
     );
   }
