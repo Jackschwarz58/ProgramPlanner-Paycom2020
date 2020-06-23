@@ -11,7 +11,7 @@ class SideBar extends Component {
               <img
                 className="sidebar-img"
                 src={`../assets/brand-logo.jpg`}
-                alt="No Image!"
+                alt="???"
                 loading="lazy"
               />
               <div>
