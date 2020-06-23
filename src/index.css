@@ -50,6 +50,7 @@ code {
 #top-bar {
   margin-left: 240px;
   border-bottom: 1px solid lightgray;
+  background-color: #edeef0;
 }
 
 .top-action-btn {
@@ -63,7 +64,6 @@ code {
 
 .rounded-img {
   border-radius: 50%;
-  border: 1px solid gray;
 }
 
 #user-name-label {
@@ -73,5 +73,9 @@ code {
 
 #card-container {
   margin-top: 80px;
-  ;
+}
+
+#sidebar-session-header {
+  color: #ffffffc0;
+  font-style: italic;
 }
