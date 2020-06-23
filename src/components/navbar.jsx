@@ -5,31 +5,12 @@ import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
 
 class NavBar extends Component {
   render() {
-    const dropdownStyle = {
-      fontSize: ".7em",
-      marginLeft: ".5em",
-    };
-    const titleStyle = {
-      fontSize: "3em",
-      fontWeight: "500",
-    };
-
-    const profileStyle = {
-      borderRadius: "50%",
-      border: "1px solid white",
-    };
-
-    const navItemStyle = {
-      fontSize: "1.25em",
-      fontWeight: "500",
-    };
-
     return (
-      <div className="conatiner-fluid">
-        <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-success px-4 py-3 shadow">
-          <a className="navbar-brand text-white" style={titleStyle} href="#">
-            Summer Book Club 2k20
-          </a>
+      <div>
+        <nav
+          className="navbar navbar-expand-lg fixed-top navbar-light shadow-sm"
+          id="top-bar"
+        >
           <button
             className="navbar-toggler"
             type="button"
@@ -45,12 +26,8 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto mr-5">
               <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  style={navItemStyle}
-                >
-                  <a className="nav-link text-white">
+                <button type="button" className="btn btn-sm top-action-btn">
+                  <a className="text-dark">
                     <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
                   </a>
                 </button>
@@ -59,15 +36,14 @@ class NavBar extends Component {
             <div>
               <a className="navbar-brand" href="#">
                 <img
-                  className="navbar-img"
-                  style={profileStyle}
+                  className="rounded-img"
                   src={`../assets/${this.props.user.id}-profile.jpg`}
                   width="38"
                   height="38"
                   alt="??"
                   loading="lazy"
                 />
-                <span className="text-white" style={dropdownStyle}>
+                <span className="text-dark" id="user-name-label">
                   {this.props.user.userName}
                 </span>
               </a>
