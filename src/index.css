@@ -24,7 +24,7 @@ code {
 }
 
 .sidebar-header {
-  height: 335;
+  height: 30%;
   background-image: url('/assets/header-bg.jpg');
   background-size: 100% 100%;
 }
@@ -45,4 +45,33 @@ code {
 
 #wrapper {
   margin-left: 240px;
+}
+
+#top-bar {
+  margin-left: 240px;
+  border-bottom: 1px solid lightgray;
+}
+
+.top-action-btn {
+  font-size: "1.25em";
+  font-weight: "500",
+}
+
+.top-action-btn:hover {
+  background-color: #D3D3D3;
+}
+
+.rounded-img {
+  border-radius: 50%;
+  border: 1px solid gray;
+}
+
+#user-name-label {
+  font-size: .7em;
+  margin-left: .5em;
+}
+
+#card-container {
+  margin-top: 80px;
+  ;
 }

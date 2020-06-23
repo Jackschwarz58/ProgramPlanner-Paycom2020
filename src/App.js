@@ -63,7 +63,7 @@ class App extends Component {
       <React.Fragment>
         <SideBar />
         <div id="wrapper">
-          {/* <NavBar user={this.state.users[0]} />*/}
+          <NavBar user={this.state.users[0]} />
           <CardContainer
             sessionCards={this.state.sessions}
             onDelete={this.handleDelete}
