@@ -26,7 +26,7 @@ class App extends Component {
     sessions: [
       {
         id: 1,
-        title: "Example Session Title 1",
+        title: "Technology and You",
         date: "Monday June 29, 2020 at 7:50pm",
         time: "",
         desc: "This is an example session. This should be the first one",
@@ -34,7 +34,7 @@ class App extends Component {
       },
       {
         id: 2,
-        title: "Example Session Title 2",
+        title: "Software Development Meeting",
         date: "Monday June 25, 2020 at 12:50am",
         time: "",
         desc: "This is an example session. This should be the second one",
@@ -42,7 +42,7 @@ class App extends Component {
       },
       {
         id: 3,
-        title: "Example Session Title 3",
+        title: "Clean Code Book Review: Chpt 5-7",
         date: "Wednesday June 27, 2020 at 12:50am",
         time: "",
         desc: "This is an example session. This should be the third one",
@@ -52,9 +52,7 @@ class App extends Component {
   };
 
   handleDelete = (sessionId) => {
-    console.log(sessionId);
     const sessions = this.state.sessions.filter((s) => s.id !== sessionId);
-    console.log(sessions);
     this.setState({ sessions });
   };
 
