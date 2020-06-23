@@ -6,7 +6,7 @@ class CardContainer extends Component {
   render() {
     const { sessionCards, onDelete } = this.props;
     return (
-      <div>
+      <div id="card-container">
         {sessionCards.map((sessionCard) => (
           <SessionCard
             key={sessionCard.id}
