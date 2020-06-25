@@ -1,12 +1,19 @@
 import React, { Component } from "react";
+import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class SessionCard extends Component {
-  state = { editing: false };
+  state = { editing: false, startDate: new Date() };
+
+  constructor() {
+    super();
+    this.handleDateChange = this.handleDateChange.bind(this);
+  }
 
   render() {
     const { id, title, date, desc, attendeeCount, onDelete } = this.props;
+
     return (
       <div className="container bg-light my-4 p-3 rounded shadow-sm">
         <div className="row">
@@ -20,6 +27,7 @@ class SessionCard extends Component {
                     className="card-edit-field"
                     type="text"
                     defaultValue={title}
+                    placeholder="Session Title"
                     ref={(node) => {
                       this.newTitle = node;
                     }}
@@ -28,7 +36,21 @@ class SessionCard extends Component {
               </h2>
             </span>
             <h5 className="text-secondary">
-              <span>{date}</span>
+              <span>
+                {!this.state.editing ? (
+                  <span>{date}</span>
+                ) : (
+                  <DatePicker
+                    selected={this.state.startDate}
+                    onChange={this.handleDateChange}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                  />
+                )}
+              </span>
             </h5>
             <p className="mt-4">
               <span>{desc}</span>
@@ -63,6 +85,10 @@ class SessionCard extends Component {
         </div>
       </div>
     );
+  }
+  handleDateChange() {
+    console.log(this.state);
+    this.setState({ startDate: this.state.startDate });
   }
 }
 
