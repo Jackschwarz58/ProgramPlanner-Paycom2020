@@ -6,15 +6,25 @@ class SessionCard extends Component {
   state = {};
   render() {
     const { id, title, date, desc, attendeeCount } = this.props;
+    let editState = true;
     return (
       <div className="container bg-light my-4 p-3 rounded shadow-sm">
         <div className="row">
           <div className="col col-10">
-            <h2>{title}</h2>
-            <h5 className="text-secondary">{date}</h5>
-            <p className="mt-4">{desc}</p>
+            <span>
+              <h2>
+                <span contentEditable={editState}>{title}</span>
+              </h2>
+            </span>
+            <h5 className="text-secondary">
+              <span contentEditable={editState}>{date}</span>
+            </h5>
+            <p className="mt-4" contentEditable={editState}>
+              <span>{desc}</span>
+            </p>
             <span className="mt-4 text-muted font-italic">
-              Attendees: {attendeeCount}
+              Attendees:{" "}
+              <span contentEditable={editState}>{attendeeCount}</span>
             </span>
           </div>
           <div className="col col-2 text-secondary">
