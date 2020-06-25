@@ -3,28 +3,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class SessionCard extends Component {
-  state = {};
+  state = { editing: false };
+
   render() {
-    const { id, title, date, desc, attendeeCount } = this.props;
-    let editState = true;
+    const { id, title, date, desc, attendeeCount, onDelete } = this.props;
     return (
       <div className="container bg-light my-4 p-3 rounded shadow-sm">
         <div className="row">
           <div className="col col-10">
             <span>
               <h2>
-                <span contentEditable={editState}>{title}</span>
+                {!this.state.editing ? (
+                  <span>{title}</span>
+                ) : (
+                  <input
+                    className="card-edit-field"
+                    type="text"
+                    defaultValue={title}
+                    ref={(node) => {
+                      this.newTitle = node;
+                    }}
+                  />
+                )}
               </h2>
             </span>
             <h5 className="text-secondary">
-              <span contentEditable={editState}>{date}</span>
+              <span>{date}</span>
             </h5>
-            <p className="mt-4" contentEditable={editState}>
+            <p className="mt-4">
               <span>{desc}</span>
             </p>
             <span className="mt-4 text-muted font-italic">
-              Attendees:{" "}
-              <span contentEditable={editState}>{attendeeCount}</span>
+              Attendees: <span>{attendeeCount}</span>
             </span>
           </div>
           <div className="col col-2 text-secondary">
@@ -34,12 +44,18 @@ class SessionCard extends Component {
                 className="btn btn-light float-right text-danger"
                 onClick={() => {
                   window.confirm("Is it okay to delete the session?") &&
-                    this.props.onDelete(id);
+                    onDelete(id);
                 }}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
-              <button type="button" className="btn btn-light float-right">
+              <button
+                type="button"
+                className="btn btn-light float-right"
+                onClick={() => {
+                  this.setState({ editing: !this.state.editing });
+                }}
+              >
                 <FontAwesomeIcon icon={faEdit} />
               </button>
             </div>

@@ -80,11 +80,13 @@ code {
   font-style: italic;
 }
 
-[contenteditable="true"], [contenteditable="true"]:active, [contenteditable="true"]:focus {
+.card-edit-field {
+  width: 50%;
   border: none;
-  outline: none;
-  width: auto;
-  background-color: #e7e7e7;
-  padding: 0px 5px;
+  background-color: #e0e0e0;
   border-radius: 5px;
+  padding: 0px 8px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
