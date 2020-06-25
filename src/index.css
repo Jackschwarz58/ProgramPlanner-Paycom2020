@@ -79,3 +79,12 @@ code {
   color: #ffffffc0;
   font-style: italic;
 }
+
+[contenteditable="true"], [contenteditable="true"]:active, [contenteditable="true"]:focus {
+  border: none;
+  outline: none;
+  width: auto;
+  background-color: #e7e7e7;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
