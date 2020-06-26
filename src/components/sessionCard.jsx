@@ -12,6 +12,7 @@ class SessionCard extends Component {
     this.buildDateEditField = this.buildDateEditField.bind(this);
     this.buildTitleEditField = this.buildTitleEditField.bind(this);
     this.buildDescEditField = this.buildDescEditField.bind(this);
+    this.buildAttendeeEditField = this.buildAttendeeEditField.bind(this);
   }
 
   render() {
