@@ -80,7 +80,7 @@ code {
   font-style: italic;
 }
 
-.card-edit-field {
+#card-edit-field {
   width: 75%;
   border: 1px solid #d3d3d3;
   background-color: #e0e0e0;
@@ -109,4 +109,13 @@ code {
 
 .react-datepicker-wrapper, .react-datepicker__input-container {
   width: 55%;
+}
+
+#card-desc-edit-field {
+  width: 100%;
+  resize: none;
+  border: 1px solid #d3d3d3;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 0px 8px;
 }
