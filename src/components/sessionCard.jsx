@@ -49,7 +49,14 @@ class SessionCard extends Component {
               </span>
             </p>
             <span className="mt-4 text-muted font-italic">
-              Attendees: <span>{attendeeCount}</span>
+              Attendees:{" "}
+              <span>
+                {!this.state.editing ? (
+                  <span>{attendeeCount}</span>
+                ) : (
+                  this.buildAttendeeEditField()
+                )}
+              </span>
             </span>
           </div>
           <div className="col col-2 text-secondary">
@@ -79,6 +86,7 @@ class SessionCard extends Component {
       </div>
     );
   }
+
   handleDateChange() {
     this.setState({ startDate: this.state.startDate });
   }
@@ -116,9 +124,18 @@ class SessionCard extends Component {
         id="card-desc-edit-field"
         type="text"
         placeholder="Session Description"
-      >
-        {this.props.desc}
-      </textarea>
+        defaultValue={this.props.desc}
+      ></textarea>
+    );
+  }
+
+  buildAttendeeEditField() {
+    return (
+      <input
+        id="card-attendee-edit-field"
+        type="number"
+        defaultValue={this.props.attendeeCount}
+      />
     );
   }
 }
