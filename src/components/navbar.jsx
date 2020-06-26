@@ -29,7 +29,11 @@ class NavBar extends Component {
           >
             <ul className="navbar-nav ">
               <li className="nav-item">
-                <button type="button" className="btn btn-sm top-action-btn">
+                <button
+                  type="button"
+                  className="btn btn-sm top-action-btn"
+                  onClick={() => this.props.onAdd()}
+                >
                   <a className="text-dark">
                     <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
                   </a>
