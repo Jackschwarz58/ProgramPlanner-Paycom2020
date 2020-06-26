@@ -40,15 +40,7 @@ class SessionCard extends Component {
                 {!this.state.editing ? (
                   <span>{date}</span>
                 ) : (
-                  <DatePicker
-                    selected={this.state.startDate}
-                    onChange={this.handleDateChange}
-                    showTimeSelect
-                    timeFormat="HH:mm"
-                    timeIntervals={15}
-                    timeCaption="time"
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                  />
+                  this.buildDatePicker()
                 )}
               </span>
             </h5>
@@ -89,6 +81,20 @@ class SessionCard extends Component {
   handleDateChange() {
     console.log(this.state);
     this.setState({ startDate: this.state.startDate });
+  }
+
+  buildDatePicker() {
+    return (
+      <DatePicker
+        selected={this.state.startDate}
+        onChange={this.handleDateChange}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        timeCaption="time"
+        dateFormat="EEEE MMMM d, yyyy 'at' h:mma"
+      />
+    );
   }
 }
 
