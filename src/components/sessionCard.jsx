@@ -9,6 +9,9 @@ class SessionCard extends Component {
   constructor() {
     super();
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.buildDateEditField = this.buildDateEditField.bind(this);
+    this.buildTitleEditField = this.buildTitleEditField.bind(this);
+    this.buildDescEditField = this.buildDescEditField.bind(this);
   }
 
   render() {
@@ -23,15 +26,7 @@ class SessionCard extends Component {
                 {!this.state.editing ? (
                   <span>{title}</span>
                 ) : (
-                  <input
-                    className="card-edit-field"
-                    type="text"
-                    defaultValue={title}
-                    placeholder="Session Title"
-                    ref={(node) => {
-                      this.newTitle = node;
-                    }}
-                  />
+                  this.buildTitleEditField()
                 )}
               </h2>
             </span>
@@ -40,12 +35,18 @@ class SessionCard extends Component {
                 {!this.state.editing ? (
                   <span>{date}</span>
                 ) : (
-                  this.buildDatePicker()
+                  this.buildDateEditField()
                 )}
               </span>
             </h5>
             <p className="mt-4">
-              <span>{desc}</span>
+              <span>
+                {!this.state.editing ? (
+                  <span>{desc}</span>
+                ) : (
+                  this.buildDescEditField()
+                )}
+              </span>
             </p>
             <span className="mt-4 text-muted font-italic">
               Attendees: <span>{attendeeCount}</span>
@@ -79,11 +80,10 @@ class SessionCard extends Component {
     );
   }
   handleDateChange() {
-    console.log(this.state);
     this.setState({ startDate: this.state.startDate });
   }
 
-  buildDatePicker() {
+  buildDateEditField() {
     return (
       <DatePicker
         selected={this.state.startDate}
@@ -94,6 +94,31 @@ class SessionCard extends Component {
         timeCaption="time"
         dateFormat="EEEE MMMM d, yyyy 'at' h:mma"
       />
+    );
+  }
+  buildTitleEditField() {
+    return (
+      <input
+        id="card-edit-field"
+        type="text"
+        defaultValue={this.props.title}
+        placeholder="Session Title"
+        /*ref={(node) => {
+          this.newTitle = node;
+        }}*/
+      />
+    );
+  }
+
+  buildDescEditField() {
+    return (
+      <textarea
+        id="card-desc-edit-field"
+        type="text"
+        placeholder="Session Description"
+      >
+        {this.props.desc}
+      </textarea>
     );
   }
 }
