@@ -104,4 +104,9 @@ code {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.2;
+  width: 100%;
+}
+
+.react-datepicker-wrapper, .react-datepicker__input-container {
+  width: 55%;
 }
