@@ -8,6 +8,7 @@ class SessionCard extends Component {
 
   constructor() {
     super();
+
     this.handleDateChange = this.handleDateChange.bind(this);
     this.buildDateEditField = this.buildDateEditField.bind(this);
     this.buildTitleEditField = this.buildTitleEditField.bind(this);
@@ -16,7 +17,15 @@ class SessionCard extends Component {
   }
 
   render() {
-    const { id, title, date, desc, attendeeCount, onDelete } = this.props;
+    const {
+      id,
+      title,
+      date,
+      desc,
+      attendeeCount,
+      onDelete,
+      onEdit,
+    } = this.props;
 
     return (
       <div className="container bg-light my-4 p-3 rounded shadow-sm">
@@ -112,9 +121,6 @@ class SessionCard extends Component {
         type="text"
         defaultValue={this.props.title}
         placeholder="Session Title"
-        /*ref={(node) => {
-          this.newTitle = node;
-        }}*/
       />
     );
   }
