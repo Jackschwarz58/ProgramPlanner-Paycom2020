@@ -18,11 +18,6 @@ class App extends Component {
         name: "Sydney Schwarz",
         userName: "SydneySchwarz58",
       },
-      {
-        id: "3",
-        name: "Connor Sharp",
-        userName: "LookinSharp720",
-      },
     ],
     sessions: [
       {
@@ -71,6 +66,11 @@ class App extends Component {
     this.setState({ sessions });
   };
 
+  handleEdit = (sessionId) => {
+    const sessions = this.state.sessions;
+    const sessionToEdit = sessions.find((s) => s.id === sessionId);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -80,6 +80,7 @@ class App extends Component {
           <CardContainer
             sessionCards={this.state.sessions}
             onDelete={this.handleDelete}
+            onEdit={this.handleEdit}
           />
         </div>
       </React.Fragment>
