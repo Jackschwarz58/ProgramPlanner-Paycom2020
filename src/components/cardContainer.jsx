@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import SessionCard from "./sessionCard";
 
 class CardContainer extends Component {
-  state = {};
   render() {
-    const { sessionCards, onDelete } = this.props;
+    const { sessionCards, onDelete, onEdit } = this.props;
     return (
       <div id="card-container">
         {sessionCards.map((sessionCard) => (
@@ -16,6 +15,7 @@ class CardContainer extends Component {
             desc={sessionCard.desc}
             attendeeCount={sessionCard.attendeeCount}
             onDelete={onDelete}
+            onEdit={onEdit}
           ></SessionCard>
         ))}
       </div>
