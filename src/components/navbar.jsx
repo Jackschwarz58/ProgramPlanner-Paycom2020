@@ -5,6 +5,7 @@ import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
 
 class NavBar extends Component {
   render() {
+    const { user, onAdd } = this.props;
     return (
       <div>
         <nav
@@ -32,7 +33,7 @@ class NavBar extends Component {
                 <button
                   type="button"
                   className="btn btn-sm top-action-btn"
-                  onClick={() => this.props.onAdd()}
+                  onClick={() => onAdd()}
                 >
                   <a className="text-dark">
                     <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
@@ -44,14 +45,14 @@ class NavBar extends Component {
               <a className="navbar-brand" href="#">
                 <img
                   className="rounded-img"
-                  src={`../assets/${this.props.user.id}-profile.jpg`}
+                  src={`../assets/${user.id}-profile.jpg`}
                   width="38"
                   height="38"
                   alt="??"
                   loading="lazy"
                 />
                 <span className="text-dark" id="user-name-label">
-                  {this.props.user.userName}
+                  {user.userName}
                 </span>
               </a>
             </div>
