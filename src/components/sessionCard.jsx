@@ -20,15 +20,15 @@ class SessionCard extends Component {
     const {
       id,
       title,
-      date,
+      dateTime,
       desc,
       attendeeCount,
       onDelete,
-      onEdit,
+      //onEdit,
     } = this.props;
 
     return (
-      <div className="container bg-light my-4 p-3 rounded shadow-sm">
+      <div className="container bg-light my-4 p-3 rounded shadow-sm" id={id}>
         <div className="row">
           <div className="col col-10">
             <span>
@@ -43,7 +43,7 @@ class SessionCard extends Component {
             <h5 className="text-secondary">
               <span>
                 {!this.state.editing ? (
-                  <span>{date}</span>
+                  <span>{dateTime}</span>
                 ) : (
                   this.buildDateEditField()
                 )}
@@ -104,6 +104,7 @@ class SessionCard extends Component {
   buildDateEditField() {
     return (
       <DatePicker
+        className="edit-field"
         selected={this.state.startDate}
         onChange={this.handleDateChange}
         showTimeSelect
@@ -117,6 +118,7 @@ class SessionCard extends Component {
   buildTitleEditField() {
     return (
       <input
+        className="edit-field"
         id="card-edit-field"
         type="text"
         defaultValue={this.props.title}
@@ -128,6 +130,7 @@ class SessionCard extends Component {
   buildDescEditField() {
     return (
       <textarea
+        className="edit-field"
         id="card-desc-edit-field"
         type="text"
         placeholder="Session Description"
@@ -139,6 +142,7 @@ class SessionCard extends Component {
   buildAttendeeEditField() {
     return (
       <input
+        className="edit-field"
         id="card-attendee-edit-field"
         type="number"
         defaultValue={this.props.attendeeCount}

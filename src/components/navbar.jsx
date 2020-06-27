@@ -41,10 +41,10 @@ class NavBar extends Component {
                 </button>
               </li>
             </ul>
-            <div className="navbar-nav ml-auto">
+            <div className="navbar-nav ml-auto top-action-btn rounded pl-2">
               <a className="navbar-brand" href="#">
                 <img
-                  className="rounded-img"
+                  className="rounded-circle"
                   src={`../assets/${user.id}-profile.jpg`}
                   width="38"
                   height="38"

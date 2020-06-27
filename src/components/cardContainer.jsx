@@ -11,7 +11,7 @@ class CardContainer extends Component {
             key={sessionCard.id}
             id={sessionCard.id}
             title={sessionCard.title}
-            date={sessionCard.date}
+            dateTime={sessionCard.dateTime}
             desc={sessionCard.desc}
             attendeeCount={sessionCard.attendeeCount}
             onDelete={onDelete}
