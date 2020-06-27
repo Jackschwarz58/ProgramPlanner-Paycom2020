@@ -8,7 +8,7 @@ class SideBar extends Component {
           <div id="sidebar-black-layer">
             <div className="p-3 h-100 d-flex flex-column align-items-center justify-content-center text-center">
               <img
-                className="sidebar-img"
+                className="sidebar-img rounded-circle"
                 src={`../assets/brand-logo.jpg`}
                 height="133px"
                 width="133px"
@@ -21,9 +21,21 @@ class SideBar extends Component {
             </div>
           </div>
         </div>
-        <h6 className="p-3 text-center" id="sidebar-session-header">
-          Upcoming Sessions
-        </h6>
+        <div>
+          <h6 className="p-3 text-center" id="sidebar-session-header">
+            Upcoming Sessions
+          </h6>
+          <ul id="upcoming-session-list">
+            <li className="session-list-item rounded">Technology and You</li>
+            <li className="session-list-item rounded">
+              Software Development Meeting
+            </li>
+            <li className="session-list-item rounded">
+              Clean Code Book Review Chpt 5-7
+            </li>
+            <li className="session-list-item rounded">Session Name</li>
+          </ul>
+        </div>
       </nav>
     );
   }
