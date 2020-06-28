@@ -26,14 +26,11 @@ class SideBar extends Component {
             Upcoming Sessions
           </h6>
           <ul id="upcoming-session-list">
-            <li className="session-list-item rounded">Technology and You</li>
-            <li className="session-list-item rounded">
-              Software Development Meeting
-            </li>
-            <li className="session-list-item rounded">
-              Clean Code Book Review Chpt 5-7
-            </li>
-            <li className="session-list-item rounded">Session Name</li>
+            {this.props.sessions.map((session) => (
+              <li className="session-list-item rounded" key={session.id}>
+                <a href={"#" + session.id}>{session.title}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
