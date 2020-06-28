@@ -41,6 +41,48 @@ class App extends Component {
         desc: "This is an example session. This should be the third one",
         attendeeCount: 85,
       },
+      {
+        id: 4,
+        title: "Worst Coding Practices",
+        dateTime: "Monday June 29, 2020 at 7:50 PM",
+        desc: "This is an example session. This should be the first one",
+        attendeeCount: 34,
+      },
+      {
+        id: 5,
+        title: "OAuth Info Session",
+        dateTime: "Monday June 25, 2020 at 12:50 AM",
+        desc: "This is an example session. This should be the second one",
+        attendeeCount: 19,
+      },
+      {
+        id: 6,
+        title: "React for Dummies",
+        dateTime: "Wednesday June 27, 2020 at 12:50 AM",
+        desc: "This is an example session. This should be the third one",
+        attendeeCount: 93,
+      },
+      {
+        id: 7,
+        title: "Avengers Movie Marathon",
+        dateTime: "Monday June 29, 2020 at 7:50 PM",
+        desc: "This is an example session. This should be the first one",
+        attendeeCount: 55,
+      },
+      {
+        id: 8,
+        title: "Privacy Policies and Cookies",
+        dateTime: "Monday June 25, 2020 at 12:50 AM",
+        desc: "This is an example session. This should be the second one",
+        attendeeCount: 1,
+      },
+      {
+        id: 9,
+        title: "How to Edit VIM 101",
+        dateTime: "Wednesday June 27, 2020 at 12:50 AM",
+        desc: "This is an example session. This should be the third one",
+        attendeeCount: 190,
+      },
     ],
   };
 
@@ -70,7 +112,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <SideBar />
+        <SideBar sessions={this.state.sessions} />
         <div id="wrapper">
           <NavBar user={this.state.users[0]} onAdd={this.handleNewSession} />
           <CardContainer
