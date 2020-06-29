@@ -1,0 +1,20 @@
+html, body {
+    height: 100vh;
+}
+
+#login-wrapper {
+    height: 100vh;
+}
+
+#login-card {
+    width: 20vw;
+}
+
+.login-field-input {
+    width: 100%;
+}
+
+#login-hero-img {
+    width: 45%;
+    padding: 15px;
+}
