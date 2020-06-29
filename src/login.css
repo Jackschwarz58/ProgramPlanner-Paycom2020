@@ -4,6 +4,9 @@ html, body {
 
 #login-wrapper {
     height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)), url("/assets/header-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #login-card {

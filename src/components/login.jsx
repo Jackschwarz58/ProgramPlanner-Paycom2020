@@ -23,13 +23,22 @@ class Login extends Component {
             </h4>
             <p className="card-text ">
               <h6>Username</h6>
-              <input className="login-field-input mb-4"></input>
+              <input
+                type="text"
+                className="login-field-input mb-4"
+                required
+              ></input>
               <h6>Password</h6>
-              <input className="login-field-input mb-5"></input>
+              <input
+                type="password"
+                className="login-field-input mb-5"
+                required
+              ></input>
             </p>
-            <a href="#" className="btn btn-primary">
-              Login
-            </a>
+            <div className="d-flex">
+              <div className="btn btn-secondary ">Sign Up</div>
+              <div className="btn btn-primary ml-auto">Login</div>
+            </div>
           </div>
         </div>
       </div>
