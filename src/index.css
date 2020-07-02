@@ -3,148 +3,25 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #edeef0;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-#card-container {
-  margin-top: 80px;
-}
-
-#sidebar {
-  width: 240px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 999;
-  background-color: #4c7c36;
-  color: #fff;
-  transition: all 0.3s;
-}
-
-.sidebar-header {
-  height: 30%;
-  background-image: url("/assets/header-bg.jpg");
-  background-size: 100% 100%;
-}
-
-#sidebar-black-layer {
-  background-color: rgba(28, 25, 25, 0.37);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.sidebar-img {
-  border: 1px solid white;
-  width: 65%;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 #wrapper {
   margin-left: 240px;
 }
 
-#top-bar {
-  margin-left: 240px;
-  border-bottom: 1px solid lightgray;
-  background-color: #edeef0;
-}
-
-.top-action-btn {
-  font-size: "1.25em";
-  font-weight: "500";
-  transition: 0.3s;
-}
-
-.top-action-btn:hover {
-  background-color: #d3d3d3;
-}
-
-#user-name-label {
-  font-size: 0.7em;
-  margin-left: 0.5em;
-}
-
-#sidebar-session-header {
-  color: #ffffffc0;
-  font-style: italic;
-}
-
-#card-edit-field {
-  width: 75%;
-  padding: 0px 8px;
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-.react-datepicker__input-container {
-  border: 1px solid #e5e5e5;
-  background-color: #ebebeb;
-  border-radius: 5px;
-  padding: 0px 8px;
-}
-
-.react-datepicker__input-container input {
-  background-color: #ebebeb;
-  border: none;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.2;
-  width: 100%;
-}
-
-.react-datepicker-wrapper, .react-datepicker__input-container {
-  width: 68%;
-}
-
-#card-desc-edit-field {
-  width: 100%;
-  resize: none;
-  padding: 0px 8px;
-}
-
-#card-attendee-edit-field {
-  padding: 0px 8px;
-  width: 8%;
-}
-
-.edit-field {
-  border: 1px solid #e5e5e5;
-  background-color: #ebebeb;
-  border-radius: 5px;
-}
-
-#upcoming-session-list {
-  padding: 0;
-  list-style: none;
-  font-size: .9rem;
-  margin: 0px 10px;
-}
-
-.session-list-item {
-  margin-bottom: 10px;
-  padding: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: 0.3s;
-}
-
-.session-list-item:hover {
-  background-color: #599c3e;
-  cursor: pointer;
-}
-
-a, a:hover {
+a,
+a:hover {
   text-decoration: none;
   color: inherit;
 }
