@@ -4,6 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
 
 ReactDOM.render(
