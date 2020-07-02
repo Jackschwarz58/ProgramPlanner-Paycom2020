@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
+import "./navbar.css";
 
 class NavBar extends Component {
   render() {

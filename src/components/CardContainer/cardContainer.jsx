@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SessionCard from "./sessionCard";
+import SessionCard from "../SessionCard/sessionCard";
+import "./cardContainer.css";
 
 class CardContainer extends Component {
   render() {

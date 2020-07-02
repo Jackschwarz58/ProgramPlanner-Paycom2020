@@ -1,0 +1,20 @@
+#top-bar {
+    margin-left: 240px;
+    border-bottom: 1px solid lightgray;
+    background-color: #edeef0;
+}
+
+.top-action-btn {
+    font-size: "1.25em";
+    font-weight: "500";
+    transition: 0.3s;
+}
+
+.top-action-btn:hover {
+    background-color: #d3d3d3;
+}
+
+#user-name-label {
+    font-size: 0.7em;
+    margin-left: 0.5em;
+}
