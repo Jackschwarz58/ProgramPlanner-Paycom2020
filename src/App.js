@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import NavBar from "./components/navbar";
-import CardContainer from "./components/cardContainer";
-import SideBar from "./components/sidebar";
-import "./App.css";
+import NavBar from "./components/Navbar/navbar";
+import CardContainer from "./components/CardContainer/cardContainer";
+import SideBar from "./components/Sidebar/sidebar";
+import Login from "./components/Login/login";
 import "react-datepicker/dist/react-datepicker.css";
 
 class App extends Component {
@@ -122,6 +122,9 @@ class App extends Component {
           />
         </div>
       </React.Fragment>
+      // <React.Fragment>
+      //   <Login />
+      // </React.Fragment>
     );
   }
 }
