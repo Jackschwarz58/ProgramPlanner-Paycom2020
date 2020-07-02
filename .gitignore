@@ -16,6 +16,9 @@
 /public/assets/2-profile.jpg
 /public/assets/3-profile.jpg
 
+# test data
+/src/data
+
 # misc
 .DS_Store
 .env.local
