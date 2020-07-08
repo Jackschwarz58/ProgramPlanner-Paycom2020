@@ -10,7 +10,7 @@ class SideBar extends Component {
             <div className="p-3 h-100 d-flex flex-column align-items-center justify-content-center text-center">
               <img
                 className="sidebar-img rounded-circle"
-                src={`../assets/brand-logo.jpg`}
+                src={`../assets/img/brand-logo.jpg`}
                 height="133px"
                 width="133px"
                 alt="???"

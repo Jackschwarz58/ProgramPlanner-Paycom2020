@@ -46,7 +46,7 @@ class NavBar extends Component {
               <a className="navbar-brand" href="#">
                 <img
                   className="rounded-circle"
-                  src={`../assets/${user.id}-profile.jpg`}
+                  src={`../assets/img/default-profile.jpg`}
                   width="38"
                   height="38"
                   alt="??"

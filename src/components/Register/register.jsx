@@ -1,42 +1,40 @@
 import React, { Component } from "react";
-import "./login.css";
+import "./register.css";
 import axios from "axios";
 
-class Login extends Component {
-  state = { uid: "", pwd: "" };
+class Register extends Component {
+  state = { uid: "", pwd: "", email: "", confirmPwd: "" };
   constructor() {
     super();
 
-    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleSignUpClick = this.handleSignUpClick.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
   render() {
     return (
       <div
-        id="login-wrapper"
+        id="register-wrapper"
         className="d-flex justify-content-center align-items-center"
       >
-        <div className="card shadow-lg" id="login-card">
+        <div className="card shadow-lg" id="register-card">
           <div className="d-flex justify-content-center align-items-center pt-2">
             <img
               className="rounded-circle"
-              id="login-hero-img"
+              id="register-hero-img"
               src="../assets/img/brand-logo.jpg"
               alt="Hero Image"
             />
           </div>
           <div className="card-body">
-            <h4 className="card-title text-center pb-4 pt-2">
-              Paycom Summer Engagement Program
-            </h4>
+            <h4 className="card-title text-center pb-4 pt-2">Register Tab</h4>
             <span className="card-text ">
               <h6>Username</h6>
 
               <input
                 type="text"
                 name="uid"
-                className="login-field-input mb-4"
+                className="register-field-input mb-4"
                 placeholder="Your Username/Email..."
                 onChange={this.handleFieldChange}
                 required
@@ -47,7 +45,7 @@ class Login extends Component {
               <input
                 type="password"
                 name="pwd"
-                className="login-field-input mb-5"
+                className="register-field-input mb-5"
                 placeholder="Your Password.."
                 onChange={this.handleFieldChange}
                 required
@@ -67,7 +65,7 @@ class Login extends Component {
                 className="btn btn-primary ml-auto"
                 type="submit"
                 name="login-submit"
-                onClick={this.handleLoginClick}
+                onClick={this.handleSignUpClick}
               >
                 Login
               </div>
@@ -78,7 +76,7 @@ class Login extends Component {
     );
   }
 
-  handleLoginClick = (e) => {
+  handleSignUpClick = (e) => {
     e.preventDefault();
     axios({
       method: "post",
@@ -102,4 +100,4 @@ class Login extends Component {
   };
 }
 
-export default Login;
+export default Register;

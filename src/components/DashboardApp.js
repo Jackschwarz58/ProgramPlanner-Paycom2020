@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import NavBar from "./components/Navbar/navbar";
-import CardContainer from "./components/CardContainer/cardContainer";
-import SideBar from "./components/Sidebar/sidebar";
-import Login from "./components/Login/login";
+import NavBar from "./Navbar/navbar";
+import CardContainer from "./CardContainer/cardContainer";
+import SideBar from "./Sidebar/sidebar";
 
-class App extends Component {
+class DashboardApp extends Component {
   state = {
     users: [
       {
@@ -110,22 +109,19 @@ class App extends Component {
 
   render() {
     return (
-      // <React.Fragment>
-      //   <SideBar sessions={this.state.sessions} />
-      //   <div id="wrapper">
-      //     <NavBar user={this.state.users[0]} onAdd={this.handleNewSession} />
-      //     <CardContainer
-      //       sessionCards={this.state.sessions}
-      //       onDelete={this.handleDelete}
-      //       onEdit={this.handleEdit}
-      //     />
-      //   </div>
-      // </React.Fragment>
       <React.Fragment>
-        <Login />
+        <SideBar sessions={this.state.sessions} />
+        <div id="wrapper">
+          <NavBar user={this.state.users[0]} onAdd={this.handleNewSession} />
+          <CardContainer
+            sessionCards={this.state.sessions}
+            onDelete={this.handleDelete}
+            onEdit={this.handleEdit}
+          />
+        </div>
       </React.Fragment>
     );
   }
 }
 
-export default App;
+export default DashboardApp;
