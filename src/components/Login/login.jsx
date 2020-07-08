@@ -30,7 +30,7 @@ class Login extends Component {
             <h4 className="card-title text-center pb-4 pt-2">
               Paycom Summer Engagement Program
             </h4>
-            <span className="card-text ">
+            <div className="card-text ">
               <h6>Username</h6>
 
               <input
@@ -52,7 +52,7 @@ class Login extends Component {
                 onChange={this.handleFieldChange}
                 required
               ></input>
-            </span>
+            </div>
 
             <div className="d-flex">
               <div
