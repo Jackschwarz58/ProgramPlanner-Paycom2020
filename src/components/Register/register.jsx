@@ -3,7 +3,7 @@ import "./register.css";
 import axios from "axios";
 
 class Register extends Component {
-  state = { uid: "", pwd: "", email: "", confirmPwd: "" };
+  state = { uid: "", pwd: "", email: "", confirmPwd: "", error: "" };
   constructor() {
     super();
 
@@ -27,30 +27,67 @@ class Register extends Component {
             />
           </div>
           <div className="card-body">
-            <h4 className="card-title text-center pb-4 pt-2">Register Tab</h4>
-            <span className="card-text ">
-              <h6>Username</h6>
+            <h4 className="card-title text-center pb-4 pt-2">
+              Create New Account
+            </h4>
+            {this.state.error && (
+              <h5 className="card-title text-center pb-2 pt-1 text-white rounded bg-danger">
+                {this.state.error}
+              </h5>
+            )}
+            <div className="card-text ">
+              <h6>
+                Username<span className="text-danger">*</span>
+              </h6>
 
               <input
                 type="text"
                 name="uid"
                 className="register-field-input mb-4"
-                placeholder="Your Username/Email..."
+                placeholder="Your Username..."
                 onChange={this.handleFieldChange}
                 required
               ></input>
 
-              <h6>Password</h6>
+              <h6>
+                Email Address<span className="text-danger">*</span>
+              </h6>
+
+              <input
+                type="text"
+                name="email"
+                className="register-field-input mb-5"
+                placeholder="Your Email..."
+                onChange={this.handleFieldChange}
+                required
+              ></input>
+
+              <h6>
+                Password<span className="text-danger">*</span>
+              </h6>
 
               <input
                 type="password"
                 name="pwd"
-                className="register-field-input mb-5"
+                className="register-field-input mb-4"
                 placeholder="Your Password.."
                 onChange={this.handleFieldChange}
                 required
               ></input>
-            </span>
+
+              <h6>
+                Confirm Password<span className="text-danger">*</span>
+              </h6>
+
+              <input
+                type="password"
+                name="confirmPwd"
+                className="register-field-input mb-5"
+                placeholder="Confirm Password.."
+                onChange={this.handleFieldChange}
+                required
+              ></input>
+            </div>
 
             <div className="d-flex">
               <div
@@ -59,7 +96,7 @@ class Register extends Component {
                 name="signup-submit"
                 onClick={this.props.handleCompChange}
               >
-                Sign Up
+                Cancel
               </div>
               <div
                 className="btn btn-primary ml-auto"
@@ -67,7 +104,7 @@ class Register extends Component {
                 name="login-submit"
                 onClick={this.handleSignUpClick}
               >
-                Login
+                Create
               </div>
             </div>
           </div>
@@ -89,8 +126,12 @@ class Register extends Component {
     })
       .then((result) => {
         console.log(result);
+        this.setState({ error: "" });
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        console.log(error.response.statusText);
+        this.setState({ error: error.response.statusText });
+      });
   };
 
   handleFieldChange = (e) => {
