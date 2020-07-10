@@ -2,21 +2,11 @@ import React, { Component } from "react";
 import NavBar from "./Navbar/navbar";
 import CardContainer from "./CardContainer/cardContainer";
 import SideBar from "./Sidebar/sidebar";
+import store from "../store/index";
+import { connect } from "react-redux";
 
 class DashboardApp extends Component {
   state = {
-    users: [
-      {
-        id: "1",
-        name: "Jack Schwarz",
-        userName: "Jack58",
-      },
-      {
-        id: "2",
-        name: "Sydney Schwarz",
-        userName: "SydneySchwarz58",
-      },
-    ],
     sessions: [
       {
         id: 1,
@@ -112,7 +102,7 @@ class DashboardApp extends Component {
       <React.Fragment>
         <SideBar sessions={this.state.sessions} />
         <div id="wrapper">
-          <NavBar user={this.state.users[0]} onAdd={this.handleNewSession} />
+          <NavBar user={store.getState()} onAdd={this.handleNewSession} />
           <CardContainer
             sessionCards={this.state.sessions}
             onDelete={this.handleDelete}
@@ -123,5 +113,8 @@ class DashboardApp extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return state;
+};
 
-export default DashboardApp;
+export default connect(mapStateToProps)(DashboardApp);
