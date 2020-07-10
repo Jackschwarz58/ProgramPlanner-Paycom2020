@@ -7,7 +7,7 @@ class Register extends Component {
   constructor() {
     super();
 
-    this.handleSignUpClick = this.handleSignUpClick.bind(this);
+    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
@@ -22,24 +22,29 @@ class Register extends Component {
             <img
               className="rounded-circle"
               id="register-hero-img"
-              src="../assets/img/brand-logo.jpg"
-              alt="Hero Image"
+              src="/paycomProject/assets/img/brand-logo.jpg"
+              alt="Hero Brand"
             />
           </div>
           <div className="card-body">
-            <h4 className="card-title text-center pb-4 pt-2">
-              Create New Account
-            </h4>
+            <span className="card-title text-center">
+              <h4 className="pb-2 pt-2">Create an Account</h4>
+
+              <p className="text-secondary pb-2">
+                Fill in Your Information and Click Create to Continue
+              </p>
+            </span>
+
             {this.state.error && (
-              <h5 className="card-title text-center pb-2 pt-1 text-white rounded bg-danger">
+              <h6 className="card-title text-center pb-1 pt-1 text-white rounded bg-danger">
                 {this.state.error}
-              </h5>
+              </h6>
             )}
-            <div className="card-text ">
+
+            <form className="card-text" onSubmit={this.handleSignUpSubmit}>
               <h6>
                 Username<span className="text-danger">*</span>
               </h6>
-
               <input
                 type="text"
                 name="uid"
@@ -52,11 +57,10 @@ class Register extends Component {
               <h6>
                 Email Address<span className="text-danger">*</span>
               </h6>
-
               <input
                 type="text"
                 name="email"
-                className="register-field-input mb-5"
+                className="register-field-input mb-4"
                 placeholder="Your Email..."
                 onChange={this.handleFieldChange}
                 required
@@ -65,7 +69,6 @@ class Register extends Component {
               <h6>
                 Password<span className="text-danger">*</span>
               </h6>
-
               <input
                 type="password"
                 name="pwd"
@@ -78,7 +81,6 @@ class Register extends Component {
               <h6>
                 Confirm Password<span className="text-danger">*</span>
               </h6>
-
               <input
                 type="password"
                 name="confirmPwd"
@@ -87,49 +89,47 @@ class Register extends Component {
                 onChange={this.handleFieldChange}
                 required
               ></input>
-            </div>
 
-            <div className="d-flex">
-              <div
-                className="btn btn-secondary"
-                type="submit"
-                name="signup-submit"
-                onClick={this.props.handleCompChange}
-              >
-                Cancel
+              <div className="d-flex">
+                <button
+                  className="btn btn-secondary"
+                  type="button"
+                  name="signup-submit"
+                  onClick={this.props.handleCompChange}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-primary ml-auto"
+                  type="submit"
+                  name="login-submit"
+                >
+                  Create
+                </button>
               </div>
-              <div
-                className="btn btn-primary ml-auto"
-                type="submit"
-                name="login-submit"
-                onClick={this.handleSignUpClick}
-              >
-                Create
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     );
   }
 
-  handleSignUpClick = (e) => {
+  handleSignUpSubmit = (e) => {
     e.preventDefault();
+    this.setState({ error: "" }); //Clear any Errors for next submit attempt (if necessary)
     axios({
       method: "post",
-      url: "http://192.168.64.2/paycomProject/api/login.php",
+      url: "http://192.168.64.2/paycomProject/api/signup.php",
       data: {
-        loginSubmit: 1,
-        uid: this.state.uid,
-        pwd: this.state.pwd,
+        signupSubmit: true,
+        state: this.state,
       },
     })
       .then((result) => {
-        console.log(result);
-        this.setState({ error: "" });
+        this.props.handleCompChange();
       })
       .catch((error) => {
-        console.log(error.response.statusText);
+        console.log(error.response); //TODO: Dev only
         this.setState({ error: error.response.statusText });
       });
   };
@@ -137,7 +137,6 @@ class Register extends Component {
   handleFieldChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    console.log(name, "  ", value);
   };
 }
 
