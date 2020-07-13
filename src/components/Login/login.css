@@ -1,10 +1,12 @@
-html, body {
+html,
+body {
   height: 100vh;
 }
 
 #login-wrapper {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)), url("/paycomProject/assets/img/header-bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+    url("/paycomProject/assets/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -29,7 +31,7 @@ html, body {
 
 @media only screen and (min-width: 1370px) {
   #login-card {
-    width: 20vw;
+    width: 25vw;
   }
   #login-hero-img {
     width: 10vw;

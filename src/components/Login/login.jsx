@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import "./login.css";
-import axios from "axios";
+import "./login.css"; //Ajacent CSS styling file
+import axios from "axios"; //Nicer API calls
+import { Redirect } from "react-router-dom"; //To connect to other pages in the app
+import { updateLogin } from "../../helper.js"; //User Action for Redux Store
 
 class Login extends Component {
-  state = { uid: "", pwd: "", error: "" };
+  state = { uid: "", pwd: "", error: "", toDashboard: false };
   constructor() {
     super();
 
@@ -11,94 +13,26 @@ class Login extends Component {
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
-  render() {
-    return (
-      <div
-        id="login-wrapper"
-        className="d-flex justify-content-center align-items-center"
-      >
-        <div className="card shadow-lg" id="login-card">
-          <div className="d-flex justify-content-center align-items-center pt-3">
-            <img
-              className="rounded-circle"
-              id="login-hero-img"
-              src="/paycomProject/assets/img/brand-logo.jpg"
-              alt="Hero Brand"
-            />
-          </div>
-          <div className="card-body">
-            <span className="card-title text-center">
-              <h4 className="pb-2 pt-2">Paycom Summer Engagement Program</h4>
-
-              <p className="text-secondary pb-2">
-                Login or Create an Account to Get Started
-              </p>
-            </span>
-
-            {this.state.error && (
-              <h6 className="card-title text-center pb-1 pt-1 text-white rounded bg-danger">
-                {this.state.error}
-              </h6>
-            )}
-
-            <form onSubmit={this.handleLoginSubmit} className="card-text">
-              <h6>Username</h6>
-              <input
-                type="text"
-                name="uid"
-                className="login-field-input mb-4"
-                placeholder="Your Username/Email..."
-                onChange={this.handleFieldChange}
-                required
-              ></input>
-
-              <h6>Password</h6>
-              <input
-                type="password"
-                name="pwd"
-                className="login-field-input mb-3"
-                placeholder="Your Password.."
-                onChange={this.handleFieldChange}
-                required
-              ></input>
-
-              <div className="form-check mb-4">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="rememberUsr"
-                  ref="rememberUsr"
-                />
-                <label className="form-check-label" htmlFor="rememberUsr">
-                  Keep Me Logged In
-                </label>
-              </div>
-
-              <div className="d-flex">
-                <button
-                  className="btn btn-secondary"
-                  name="signup-submit"
-                  type="button"
-                  onClick={this.props.handleCompChange}
-                >
-                  Create Account
-                </button>
-
-                <button
-                  className="btn btn-primary ml-auto"
-                  type="submit"
-                  name="login-submit"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
+  // This is used to see if a cookie was set and the user is already logged in. By default the cookie expires at session's end, but if the user chose to make it last longer (remeber me), that applies as well.
+  // The user shouldn't have to log in again if they are already "remembered" or in an active session
+  componentDidMount() {
+    axios({
+      method: "post",
+      url: "http://192.168.64.2/paycomProject/api/check.php",
+    }).then(({ data, status }) => {
+      //API defined success status number
+      //Logs the user back in and sets store vars
+      if (status === 201) {
+        this.userLogin(
+          data.login_usr_id,
+          data.login_usr_name,
+          data.login_usr_email
+        );
+      }
+    });
   }
 
+  //This is the handler for the submit button on the login page
   handleLoginSubmit = (e) => {
     e.preventDefault();
     this.setState({ error: "" }); //Clear any Errors for next submit attempt (if necessary)
@@ -106,32 +40,133 @@ class Login extends Component {
       method: "post",
       url: "http://192.168.64.2/paycomProject/api/login.php",
       data: {
+        //Sends a flag confirming call origin and the necessary info for login
         loginSubmit: true,
         state: this.state,
         rememberUsr: this.refs.rememberUsr.checked,
       },
-    }).then((result) => {
-      console.log(result.data); //TODO: Dev only
-      this.props.updateLogin("LOGIN", {
-        loggedIn: true,
-        uid: result.data.uid,
-        userName: result.data.userName,
-        email: result.data.email,
+    })
+      .then(({ data }) => {
+        this.userLogin(data.uid, data.userName, data.email); //Calls helper func to log user in
+      })
+      .catch((error) => {
+        this.setState({ error: error.response.statusText }); //Status text is displayed on the page and defined in the API
       });
-      this.props.history.push("/dashboard");
-    });
-    // .catch((error) => {
-    //   console.log(error.response); //TODO: Dev only
-    //   this.setState({ error: error.response.statusText });
-    // });
-    this.props.history.push("/dashboard");
   };
 
+  //This calls the store action to log the user info for global use
+  userLogin = (id, name, mail) => {
+    updateLogin("LOGIN", {
+      loggedIn: true,
+      uid: id,
+      userName: name,
+      email: mail,
+    });
+    this.setState({ toDashboard: true }); //Set redirect flag
+  };
+
+  //Keeps state up to date with user input
   handleFieldChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    console.log(name, "  ", value); //TODO: Dev only
   };
+
+  render() {
+    //When these flags are set, it just redirects to that page. I liked having it where the pages are seperate routes for user and dev clarity and seperation
+    if (this.state.toDashboard === true) {
+      return <Redirect to="/dashboard" />;
+    } else if (this.state.toRegister === true) {
+      return <Redirect to="/register" />;
+    } else {
+      //The main makeup of the login page. This, like the rest of the app, makes heavy use of bootstrap libraries to ensure a nice experience on all computer screen sizes (not so much mobile right now unfortunately)
+      return (
+        <div
+          id="login-wrapper"
+          className="d-flex justify-content-center align-items-center"
+        >
+          <div className="card shadow-lg" id="login-card">
+            <div className="d-flex justify-content-center align-items-center pt-3">
+              <img
+                className="rounded-circle"
+                id="login-hero-img"
+                src="/paycomProject/assets/img/brand-logo.jpg"
+                alt="Hero Brand"
+              />
+            </div>
+            <div className="card-body">
+              <span className="card-title text-center">
+                <h4 className="pb-2">Paycom Summer Engagement Program</h4>
+
+                <p className="text-secondary pb-2">
+                  Login or Create an Account to Get Started
+                </p>
+              </span>
+
+              {/* This is to display any error the user may have in their submission. All of these are API defined and thrown when attempting to log in */}
+              {this.state.error && (
+                <h6 className="card-title text-center pb-1 pt-1 text-white rounded bg-danger">
+                  {this.state.error}
+                </h6>
+              )}
+
+              <form onSubmit={this.handleLoginSubmit} className="card-text">
+                <h6>Username</h6>
+                <input
+                  type="text"
+                  name="uid"
+                  className="login-field-input mb-4"
+                  placeholder="Your Username/Email..."
+                  onChange={this.handleFieldChange}
+                  required
+                ></input>
+
+                <h6>Password</h6>
+                <input
+                  type="password"
+                  name="pwd"
+                  className="login-field-input mb-3"
+                  placeholder="Your Password.."
+                  onChange={this.handleFieldChange}
+                  required
+                ></input>
+
+                <div className="form-check mb-4">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="rememberUsr"
+                    ref="rememberUsr"
+                  />
+                  <label className="form-check-label" htmlFor="rememberUsr">
+                    Keep Me Logged In
+                  </label>
+                </div>
+
+                <div className="d-flex">
+                  <button
+                    className="btn btn-secondary"
+                    name="signup-submit"
+                    type="button"
+                    onClick={() => this.setState({ toRegister: true })}
+                  >
+                    Create Account
+                  </button>
+
+                  <button
+                    className="btn btn-primary ml-auto"
+                    type="submit"
+                    name="login-submit"
+                  >
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
 }
 
 export default Login;
