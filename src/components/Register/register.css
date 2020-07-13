@@ -1,10 +1,12 @@
-html, body {
+html,
+body {
   height: 100vh;
 }
 
 #register-wrapper {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)), url("/paycomProject/assets/img/header-bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+    url("/paycomProject/assets/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -14,7 +16,7 @@ html, body {
 }
 
 #register-hero-img {
-  width: 20vw;
+  width: 16vw;
   padding: 15px;
 }
 
@@ -23,7 +25,7 @@ html, body {
     width: 35vw;
   }
   #register-hero-img {
-    width: 15vw;
+    width: 10vw;
   }
 }
 
