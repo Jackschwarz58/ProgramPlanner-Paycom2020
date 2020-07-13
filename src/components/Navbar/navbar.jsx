@@ -1,18 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
-import "./navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //For nice glyphs on the buttons
+import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons"; //Add session button
+import "./navbar.css"; //Styling
 
+//The top bar on the component page. This is where users can log out or add a session. This bar also contains the user name and a template photo for the user.
 class NavBar extends Component {
   render() {
-    const { user, onAdd } = this.props;
+    const { user, onAdd } = this.props; //To avoid repeated code
     return (
       <div>
         <nav
           className="navbar navbar-expand-lg fixed-top navbar-light shadow-sm "
           id="top-bar"
         >
+          {/* Bootstrap Navbar stuff */}
           <button
             className="navbar-toggler"
             type="button"
@@ -34,7 +36,7 @@ class NavBar extends Component {
                 <button
                   type="button"
                   className="btn btn-sm top-action-btn"
-                  onClick={() => onAdd()}
+                  onClick={() => onAdd()} //Calls the parent-located function to add a new session
                 >
                   <a className="text-dark">
                     <FontAwesomeIcon icon={faCalendarPlus} /> Add Session
@@ -46,14 +48,14 @@ class NavBar extends Component {
               <a className="navbar-brand" href="#">
                 <img
                   className="rounded-circle"
-                  src={`/paycomProject/assets/img/default-profile.jpg`}
+                  src={`/paycomProject/assets/img/default-profile.jpg`} //I wish this was customizable but I did not think it was a necessity to spend a ton of time on
                   width="38"
                   height="38"
                   alt="??"
                   loading="lazy"
                 />
                 <span className="text-dark" id="user-name-label">
-                  {user.userName}
+                  {user.userName} {/*From the defined user in the Redux store*/}
                 </span>
               </a>
             </div>
