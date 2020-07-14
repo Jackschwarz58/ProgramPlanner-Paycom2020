@@ -5,7 +5,7 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons"; //For nice 
 import "./sessionCard.css"; //Styling
 
 class SessionCard extends Component {
-  state = { editing: false, startDate: new Date() }; //Editing flag is used to built editable fields. StartDate needed for datepicker
+  state = { editing: false, startDate: new Date(), sessionId: null }; //Editing flag is used to built editable fields. StartDate needed for datepicker
 
   constructor() {
     super();
@@ -28,7 +28,7 @@ class SessionCard extends Component {
       <DatePicker //I chose a datepicker component as it was the most user friendly way to pick dates and the react-datepicker package is super well done already.
         className="edit-field"
         selected={this.state.startDate}
-        onChange={this.handleDateChange}
+        onChange={this.props.handleDateChange}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
@@ -43,7 +43,9 @@ class SessionCard extends Component {
         className="edit-field"
         id="card-edit-field"
         type="text"
+        name="sessionName"
         defaultValue={this.props.title}
+        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
         placeholder="Session Title"
       />
     );
@@ -55,7 +57,9 @@ class SessionCard extends Component {
         className="edit-field"
         id="card-desc-edit-field"
         type="text"
+        name="sessionDesc"
         placeholder="Session Description"
+        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
         defaultValue={this.props.desc}
       ></textarea>
     );
@@ -67,6 +71,8 @@ class SessionCard extends Component {
         className="edit-field"
         id="card-attendee-edit-field"
         type="number"
+        name="sessionAttendees"
+        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
         defaultValue={this.props.attendeeCount}
       />
     );
@@ -80,7 +86,7 @@ class SessionCard extends Component {
       desc,
       attendeeCount,
       onDelete,
-      //onEdit,
+      onEdit,
     } = this.props; //Avoiding repeated code
 
     return (
@@ -143,6 +149,9 @@ class SessionCard extends Component {
                 type="button"
                 className="btn btn-light float-right"
                 onClick={() => {
+                  if (this.state.editing) {
+                    onEdit(id);
+                  }
                   //Sets edit state to its inverse. If editing, it stops. If read-only, switches into editing state
                   this.setState({ editing: !this.state.editing });
                 }}
