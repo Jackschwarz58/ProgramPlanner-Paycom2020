@@ -51,6 +51,31 @@ export function getSessions() {
   });
 }
 
+export function addSession() {
+  const newSess = {
+    sessionName: "Title",
+    sessionTime: Date.now(),
+    sessionDesc: "Description",
+    sessionAttendees: 1,
+  };
+  console.log(newSess);
+  return axios({
+    method: "post",
+    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    data: {
+      functionname: "addSession",
+      session: {
+        sessionName: "Title",
+        sessionTime: Date.now(),
+        sessionDesc: "Description",
+        sessionAttendees: 1,
+      },
+    },
+  }).then(() => {
+    return true;
+  });
+}
+
 export function editSession(attributes) {
   return axios({
     method: "post",
@@ -59,7 +84,7 @@ export function editSession(attributes) {
       functionname: "editSession",
       session: attributes,
     },
-  }).then((results) => {
+  }).then(() => {
     return true;
   });
 }
@@ -72,8 +97,7 @@ export function deleteSession(id) {
       functionname: "deleteSession",
       sessionId: id,
     },
-  }).then((results) => {
-    console.log(results);
+  }).then(() => {
     return true;
   });
 }
