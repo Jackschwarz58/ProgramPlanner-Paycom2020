@@ -7,7 +7,7 @@ import "./css/index.css";
 import store from "./store/index";
 import { Provider } from "react-redux";
 //Routing:
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 //Components:
 import Login from "./components/Login/login";
@@ -16,7 +16,7 @@ import DashboardApp from "./components/DashboardApp";
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter basename="/paycomProject">
       <Switch>
         {/*The login page. This is where users can be redirected to create account, login, and if a cookie is set, be routed to the dashboard*/}
         <Route path="/index" render={(props) => <Login />} />
@@ -29,7 +29,7 @@ ReactDOM.render(
           isAuth={true} //IMPLEMENT
         />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   </Provider>,
 
   document.getElementById("root")
