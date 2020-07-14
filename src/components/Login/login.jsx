@@ -2,32 +2,23 @@ import React, { Component } from "react";
 import "./login.css"; //Ajacent CSS styling file
 import axios from "axios"; //Nicer API calls
 import { Redirect } from "react-router-dom"; //To connect to other pages in the app
-import { updateLogin } from "../../helper.js"; //User Action for Redux Store
+import { updateLogin, checkLogin } from "../../helper.js"; //User Action for Redux Store
 
 class Login extends Component {
   state = { uid: "", pwd: "", error: "", toDashboard: false };
   constructor() {
     super();
-
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
   // This is used to see if a cookie was set and the user is already logged in. By default the cookie expires at session's end, but if the user chose to make it last longer (remeber me), that applies as well.
   // The user shouldn't have to log in again if they are already "remembered" or in an active session
+  // This function is defined in helpers.js as it is used here and other places throughout the app
   componentDidMount() {
-    axios({
-      method: "post",
-      url: "http://192.168.64.2/paycomProject/api/check.php",
-    }).then(({ data, status }) => {
-      //API defined success status number
-      //Logs the user back in and sets store vars
+    checkLogin().then((status) => {
       if (status === 201) {
-        this.userLogin(
-          data.login_usr_id,
-          data.login_usr_name,
-          data.login_usr_email
-        );
+        this.setState({ toDashboard: true }); //Set redirect flag
       }
     });
   }
