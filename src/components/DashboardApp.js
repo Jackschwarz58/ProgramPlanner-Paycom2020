@@ -16,6 +16,7 @@ class DashboardApp extends Component {
   updateSessionData = () => {
     getSessions()
       .then(({ data }) => {
+        data.sort((a, b) => (a.dateTime > b.dateTime ? -1 : 1));
         this.setState({ sessions: data });
       })
       .catch((e) => {
