@@ -4,79 +4,37 @@ import CardContainer from "./CardContainer/cardContainer";
 import SideBar from "./Sidebar/sidebar";
 import store from "../store/index";
 import { connect } from "react-redux";
+import { getSessions, editSession, deleteSession } from "../helper";
 
 class DashboardApp extends Component {
-  state = {
-    sessions: [
-      {
-        id: 1,
-        title: "Technology and You",
-        dateTime: "Monday June 29, 2020 at 7:50 PM",
-        desc: "This is an example session. This should be the first one",
-        attendeeCount: 14,
-      },
-      {
-        id: 2,
-        title: "Software Development Meeting",
-        dateTime: "Monday June 25, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the second one",
-        attendeeCount: 149,
-      },
-      {
-        id: 3,
-        title: "Clean Code Book Review: Chpt 5-7",
-        dateTime: "Wednesday June 27, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the third one",
-        attendeeCount: 85,
-      },
-      {
-        id: 4,
-        title: "Worst Coding Practices",
-        dateTime: "Monday June 29, 2020 at 7:50 PM",
-        desc: "This is an example session. This should be the first one",
-        attendeeCount: 34,
-      },
-      {
-        id: 5,
-        title: "OAuth Info Session",
-        dateTime: "Monday June 25, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the second one",
-        attendeeCount: 19,
-      },
-      {
-        id: 6,
-        title: "React for Dummies",
-        dateTime: "Wednesday June 27, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the third one",
-        attendeeCount: 93,
-      },
-      {
-        id: 7,
-        title: "Avengers Movie Marathon",
-        dateTime: "Monday June 29, 2020 at 7:50 PM",
-        desc: "This is an example session. This should be the first one",
-        attendeeCount: 55,
-      },
-      {
-        id: 8,
-        title: "Privacy Policies and Cookies",
-        dateTime: "Monday June 25, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the second one",
-        attendeeCount: 1,
-      },
-      {
-        id: 9,
-        title: "How to Edit VIM 101",
-        dateTime: "Wednesday June 27, 2020 at 12:50 AM",
-        desc: "This is an example session. This should be the third one",
-        attendeeCount: 190,
-      },
-    ],
+  state = { error: null, sessions: [] };
+
+  componentDidMount() {
+    this.updateSessionData();
+  }
+
+  updateSessionData = () => {
+    getSessions()
+      .then(({ data }) => {
+        this.setState({ sessions: data });
+      })
+      .catch((e) => {
+        this.setState({ error: e }, () => {
+          window.alert(e);
+        });
+      });
   };
 
-  handleDelete = (sessionId) => {
-    const sessions = this.state.sessions.filter((s) => s.id !== sessionId);
-    this.setState({ sessions });
+  handleDelete = (id) => {
+    deleteSession(id)
+      .then((result) => {
+        this.updateSessionData();
+      })
+      .catch((e) => {
+        this.setState({ error: e }, () => {
+          window.alert(e);
+        });
+      });
   };
 
   handleNewSession = () => {
@@ -92,9 +50,33 @@ class DashboardApp extends Component {
     this.setState({ sessions });
   };
 
-  handleEdit = (sessionId) => {
-    const sessions = this.state.sessions;
-    const sessionToEdit = sessions.find((s) => s.id === sessionId);
+  handleEdit = (id) => {
+    const sessionToEdit = this.state.sessions.find((s) => {
+      return s.sessionId === id;
+    });
+
+    editSession(sessionToEdit).catch((e) => {
+      this.setState({ error: e }, () => {
+        window.alert(e);
+      });
+    });
+  };
+
+  handleFieldChange = (e, id) => {
+    const { name, value } = e.target;
+
+    const index = this.state.sessions.findIndex((s) => {
+      return s.sessionId === id;
+    });
+
+    const sessions = [...this.state.sessions];
+    const item = {
+      ...sessions[index],
+      [name]: value,
+    };
+
+    sessions[index] = item;
+    this.setState({ sessions });
   };
 
   render() {
@@ -104,15 +86,17 @@ class DashboardApp extends Component {
         <div id="wrapper">
           <NavBar user={store.getState()} onAdd={this.handleNewSession} />
           <CardContainer
-            sessionCards={this.state.sessions}
+            sessions={this.state.sessions}
             onDelete={this.handleDelete}
             onEdit={this.handleEdit}
+            handleFieldChange={this.handleFieldChange}
           />
         </div>
       </React.Fragment>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return state;
 };
