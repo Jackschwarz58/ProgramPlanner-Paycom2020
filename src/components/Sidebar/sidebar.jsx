@@ -31,8 +31,8 @@ class SideBar extends Component {
           <ul id="upcoming-session-list">
             {/*This just Maps the defined sessions into a list that is set with a styling class and key*/}
             {this.props.sessions.map((session) => (
-              <li className="session-list-item rounded" key={session.id}>
-                <a href={"#" + session.id}>{session.title}</a>
+              <li className="session-list-item rounded" key={session.sessionId}>
+                <a href={"#" + session.sessionId}>{session.sessionName}</a>
               </li>
             ))}
           </ul>
