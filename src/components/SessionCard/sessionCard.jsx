@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker"; //Used for users to be able to select dates and times easier. Much more user friendly than an input field
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //Needed for icons
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons"; //For nice buttons
+import { format } from "date-fns"; //Nicer Date formatting. Didn't want to use Moment, wayy to big
 import "./sessionCard.css"; //Styling
 
 class SessionCard extends Component {
@@ -15,11 +16,23 @@ class SessionCard extends Component {
     this.buildTitleEditField = this.buildTitleEditField.bind(this);
     this.buildDescEditField = this.buildDescEditField.bind(this);
     this.buildAttendeeEditField = this.buildAttendeeEditField.bind(this);
+    this.formatDate = this.formatDate.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.isEditing === true) {
+      this.setState({ editing: true });
+    }
   }
 
   //Simply keeps the state up to date (no pun intended)
   handleDateChange() {
     this.setState({ startDate: this.state.startDate });
+  }
+
+  formatDate() {
+    const givenTime = new Date(this.props.dateTime);
+    return <span>{format(givenTime, "eeee MMMM do, yyyy 'at' h:mmaaa")}</span>;
   }
 
   //The foloowing are all only rendered when the user is editing a session. Since it would have been messy code in if statements in render(), they are seperate funcs. Much easier to read
@@ -79,15 +92,7 @@ class SessionCard extends Component {
   }
 
   render() {
-    const {
-      id,
-      title,
-      dateTime,
-      desc,
-      attendeeCount,
-      onDelete,
-      onEdit,
-    } = this.props; //Avoiding repeated code
+    const { id, title, desc, attendeeCount, onDelete, onEdit } = this.props; //Avoiding repeated code
 
     return (
       <div className="container bg-light my-4 p-3 rounded shadow-sm" id={id}>
@@ -104,11 +109,9 @@ class SessionCard extends Component {
             </span>
             <h5 className="text-secondary">
               <span>
-                {!this.state.editing ? (
-                  <span>{dateTime}</span>
-                ) : (
-                  this.buildDateEditField()
-                )}
+                {!this.state.editing
+                  ? this.formatDate()
+                  : this.buildDateEditField()}
               </span>
             </h5>
             <p className="mt-4">
