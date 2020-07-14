@@ -4,7 +4,7 @@ import CardContainer from "./CardContainer/cardContainer";
 import SideBar from "./Sidebar/sidebar";
 import store from "../store/index";
 import { connect } from "react-redux";
-import { getSessions, editSession, deleteSession } from "../helper";
+import { getSessions, addSession, editSession, deleteSession } from "../helper";
 
 class DashboardApp extends Component {
   state = { error: null, sessions: [] };
@@ -27,27 +27,26 @@ class DashboardApp extends Component {
 
   handleDelete = (id) => {
     deleteSession(id)
-      .then((result) => {
+      .then(() => {
         this.updateSessionData();
       })
       .catch((e) => {
         this.setState({ error: e }, () => {
-          window.alert(e);
+          window.alert(e + " \n" + e.response.statusText);
         });
       });
   };
 
   handleNewSession = () => {
-    const sessions = this.state.sessions;
-    const newSession = {
-      id: this.state.sessions[sessions.length - 1].id + 1,
-      title: "Title",
-      dateTime: "Date",
-      desc: "Description",
-      attendeeCount: "##",
-    };
-    sessions.unshift(newSession);
-    this.setState({ sessions });
+    addSession()
+      .then(() => {
+        this.updateSessionData();
+      })
+      .catch((e) => {
+        this.setState({ error: e }, () => {
+          window.alert(e + " \n" + e.response.statusText);
+        });
+      });
   };
 
   handleEdit = (id) => {
@@ -57,7 +56,7 @@ class DashboardApp extends Component {
 
     editSession(sessionToEdit).catch((e) => {
       this.setState({ error: e }, () => {
-        window.alert(e);
+        window.alert(e + " \n" + e.response.statusText);
       });
     });
   };
