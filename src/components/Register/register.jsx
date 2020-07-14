@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "./register.css";
 import axios from "axios"; //Nicer Fetch Calls
 import { Redirect } from "react-router-dom"; //Redirect to other pages in the app
+import { checkLogin } from "../../helper.js"; //User Action for Redux Store
 
 class Register extends Component {
-  //Stores user form input
   state = {
+    //Stores user form input
     uid: "",
     pwd: "",
     email: "",
@@ -14,11 +15,22 @@ class Register extends Component {
     toDashboard: false, //Flags for page redirects
     toLogin: false,
   };
+
   constructor() {
     super();
-
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
+  }
+
+  // This is used to see if a cookie was set and the user is already logged in. By default the cookie expires at session's end, but if the user chose to make it last longer (remeber me), that applies as well.
+  // The user shouldn't have to log in again if they are already "remembered" or in an active session
+  // This function is defined in helpers.js as it is used here and other places throughout the app
+  componentDidMount() {
+    checkLogin().then((status) => {
+      if (status === 201) {
+        this.setState({ toDashboard: true }); //Set redirect flag
+      }
+    });
   }
 
   // Calls Signup API to make the user a new account on the server
