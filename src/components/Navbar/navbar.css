@@ -4,17 +4,31 @@
     background-color: #edeef0;
 }
 
-.top-action-btn {
-    font-size: "1.25em";
-    font-weight: "500";
-    transition: 0.3s;
-}
-
-.top-action-btn:hover {
-    background-color: #d3d3d3;
-}
-
 #user-name-label {
     font-size: 0.7em;
     margin-left: 0.5em;
+}
+
+#nav-icon {
+    margin-right: 5px;
+}
+
+.nav-action {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-action:hover {
+    cursor: pointer;
+    background-color: #d3d3d3;
+}
+
+.small-font {
+    font-size: 0.7em;
+}
+
+.session-selector:hover {
+    cursor: pointer;
+    background-color: #d3d3d3;
+    transition: 0.3s;
 }
