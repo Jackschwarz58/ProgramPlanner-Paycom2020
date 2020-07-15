@@ -19,9 +19,13 @@ export function updateLogin(type, payload) {
       return axios({
         method: "post",
         url: "http://192.168.64.2/paycomProject/api/logout.php",
-      }).then((results) => {
-        return results;
-      });
+      })
+        .then((results) => {
+          return results;
+        })
+        .catch((e) => {
+          window.alert(e.response.statusText);
+        });
       break;
   }
 }
@@ -30,50 +34,59 @@ export function checkLogin() {
   return axios({
     method: "post",
     url: "http://192.168.64.2/paycomProject/api/check.php",
-  }).then(({ data, status }) => {
-    //API defined success status number
-    //Logs the user back in and sets store vars
-    if (status === 201) {
-      updateLogin("LOGIN", {
-        loggedIn: true,
-        uid: data.login_usr_id,
-        userName: data.login_usr_name,
-        email: data.login_usr_email,
-      });
-    }
-    return status;
-  });
+  })
+    .then(({ data, status }) => {
+      //API defined success status number
+      //Logs the user back in and sets store vars
+      if (status === 201) {
+        updateLogin("LOGIN", {
+          loggedIn: true,
+          uid: data.login_usr_id,
+          userName: data.login_usr_name,
+          email: data.login_usr_email,
+        });
+      }
+      return status;
+    })
+    .catch((e) => {
+      window.alert(e.response.statusText);
+    });
 }
 
 export function getUserSessions() {
   return axios({
     method: "post",
-    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
     data: {
       functionname: "getUserSessions",
       userId: store.getState().uid,
     },
-  }).then((results) => {
-    return results;
-  });
+  })
+    .then((results) => {
+      updateAttendees();
+      return results;
+    })
+    .catch((e) => {
+      window.alert(e.response.statusText);
+    });
 }
 
 export function getAllSessions() {
   return axios({
     method: "post",
-    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
     data: {
       functionname: "getAllSessions",
     },
-  }).then((results) => {
-    return results;
+  }).catch((e) => {
+    window.alert(e.response.statusText);
   });
 }
 
 export function addSession() {
   return axios({
     method: "post",
-    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
     data: {
       functionname: "addSession",
       session: {
@@ -84,34 +97,57 @@ export function addSession() {
       },
       userId: parseInt(store.getState().uid),
     },
-  }).then((result) => {
-    return true;
+  }).catch((e) => {
+    window.alert(e.response.statusText);
+  });
+}
+
+export function addRelationship(id) {
+  return axios({
+    method: "post",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
+    data: {
+      functionname: "addRelationship",
+      sessionId: id,
+      userId: parseInt(store.getState().uid),
+    },
+  }).catch((e) => {
+    window.alert(e.response.statusText);
   });
 }
 
 export function editSession(attributes) {
   return axios({
     method: "post",
-    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
     data: {
       functionname: "editSession",
       session: attributes,
     },
-  }).then(() => {
-    return true;
+  }).catch((e) => {
+    window.alert(e.response.statusText);
   });
 }
 
 export function deleteSession(id) {
   return axios({
     method: "post",
-    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    url: "http://192.168.64.2/paycomProject/api/sessions/sessions.php",
     data: {
       functionname: "deleteSession",
       sessionId: id,
       userId: parseInt(store.getState().uid),
     },
-  }).then(() => {
-    return true;
+  }).catch((e) => {
+    window.alert(e.response.statusText);
+  });
+}
+
+export function updateAttendees() {
+  return axios({
+    method: "post",
+    url: "http://192.168.64.2/paycomProject/api/updateAttendees.php",
+  }).catch((e) => {
+    window.alert(e.response.statusText);
   });
 }
