@@ -16,6 +16,12 @@ export function updateLogin(type, payload) {
       );
       break;
     case "LOGOUT":
+      return axios({
+        method: "post",
+        url: "http://192.168.64.2/paycomProject/api/logout.php",
+      }).then((results) => {
+        return results;
+      });
       break;
   }
 }
@@ -39,15 +45,25 @@ export function checkLogin() {
   });
 }
 
-// export function newLogin(loginState, rememberUsrVal) {
-// }
-
-export function getSessions() {
+export function getUserSessions() {
   return axios({
     method: "post",
     url: "http://192.168.64.2/paycomProject/api/sessions.php",
     data: {
-      functionname: "getSessions",
+      functionname: "getUserSessions",
+      userId: store.getState().uid,
+    },
+  }).then((results) => {
+    return results;
+  });
+}
+
+export function getAllSessions() {
+  return axios({
+    method: "post",
+    url: "http://192.168.64.2/paycomProject/api/sessions.php",
+    data: {
+      functionname: "getAllSessions",
     },
   }).then((results) => {
     return results;
@@ -66,8 +82,9 @@ export function addSession() {
         sessionDesc: "Your Description...",
         sessionAttendees: 1,
       },
+      userId: parseInt(store.getState().uid),
     },
-  }).then(() => {
+  }).then((result) => {
     return true;
   });
 }
@@ -92,6 +109,7 @@ export function deleteSession(id) {
     data: {
       functionname: "deleteSession",
       sessionId: id,
+      userId: parseInt(store.getState().uid),
     },
   }).then(() => {
     return true;
