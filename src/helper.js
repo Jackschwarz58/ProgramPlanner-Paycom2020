@@ -39,6 +39,9 @@ export function checkLogin() {
   });
 }
 
+// export function newLogin(loginState, rememberUsrVal) {
+// }
+
 export function getSessions() {
   return axios({
     method: "post",
@@ -52,22 +55,15 @@ export function getSessions() {
 }
 
 export function addSession() {
-  const newSess = {
-    sessionName: "Title",
-    sessionTime: Date.now(),
-    sessionDesc: "Description",
-    sessionAttendees: 1,
-  };
-  console.log(newSess);
   return axios({
     method: "post",
     url: "http://192.168.64.2/paycomProject/api/sessions.php",
     data: {
       functionname: "addSession",
       session: {
-        sessionName: "Title",
+        sessionName: "New Session...",
         sessionTime: Date.now(),
-        sessionDesc: "Description",
+        sessionDesc: "Your Description...",
         sessionAttendees: 1,
       },
     },
