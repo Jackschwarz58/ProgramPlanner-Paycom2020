@@ -23,7 +23,10 @@ class NavBar extends Component {
 
   buildExistingSessions() {
     return (
-      <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <div
+        className="dropdown-menu scrollable-menu"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
         {this.state.sessionList.map((session) => (
           <a
             className="dropdown-item pt-3 session-selector"

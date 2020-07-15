@@ -32,3 +32,9 @@
     background-color: #d3d3d3;
     transition: 0.3s;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 50vh;
+    overflow-x: hidden;
+}
