@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker"; //Used for users to be able to select dates and times easier. Much more user friendly than an input field
+import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //Needed for icons
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons"; //For nice buttons
 import { format } from "date-fns"; //Nicer Date formatting. Didn't want to use Moment, wayy to big
 import "./sessionCard.css"; //Styling
 
 class SessionCard extends Component {
-  state = { editing: false, startDate: new Date(), sessionId: null }; //Editing flag is used to built editable fields. StartDate needed for datepicker
+  state = { editing: false, sessionDate: new Date(), sessionId: null }; //Editing flag is used to built editable fields. StartDate needed for datepicker
 
   constructor() {
     super();
 
-    this.handleDateChange = this.handleDateChange.bind(this);
     this.buildDateEditField = this.buildDateEditField.bind(this);
     this.buildTitleEditField = this.buildTitleEditField.bind(this);
     this.buildDescEditField = this.buildDescEditField.bind(this);
-    this.buildAttendeeEditField = this.buildAttendeeEditField.bind(this);
     this.formatDate = this.formatDate.bind(this);
   }
 
@@ -23,11 +22,6 @@ class SessionCard extends Component {
     if (this.props.isEditing === true) {
       this.setState({ editing: true });
     }
-  }
-
-  //Simply keeps the state up to date (no pun intended)
-  handleDateChange() {
-    this.setState({ startDate: this.state.startDate });
   }
 
   formatDate() {
@@ -40,10 +34,10 @@ class SessionCard extends Component {
     return (
       <DatePicker //I chose a datepicker component as it was the most user friendly way to pick dates and the react-datepicker package is super well done already.
         className="edit-field"
-        selected={this.state.startDate}
-        onChange={this.props.handleDateChange}
+        selected={this.props.dateTime}
+        onChange={(e) => this.props.onDateChange(e, this.props.id)}
         showTimeSelect
-        timeFormat="HH:mm"
+        timeFormat="hh:mm a"
         timeIntervals={15}
         timeCaption="time"
         dateFormat="EEEE MMMM d, yyyy 'at' h:mma" //Prefered date format
@@ -58,7 +52,7 @@ class SessionCard extends Component {
         type="text"
         name="sessionName"
         defaultValue={this.props.title}
-        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
+        onChange={(e) => this.props.onFieldChange(e, this.props.id)}
         placeholder="Session Title"
       />
     );
@@ -72,22 +66,9 @@ class SessionCard extends Component {
         type="text"
         name="sessionDesc"
         placeholder="Session Description"
-        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
+        onChange={(e) => this.props.onFieldChange(e, this.props.id)}
         defaultValue={this.props.desc}
       ></textarea>
-    );
-  }
-
-  buildAttendeeEditField() {
-    return (
-      <input
-        className="edit-field"
-        id="card-attendee-edit-field"
-        type="number"
-        name="sessionAttendees"
-        onChange={(e) => this.props.handleFieldChange(e, this.props.id)}
-        defaultValue={this.props.attendeeCount}
-      />
     );
   }
 
@@ -126,13 +107,7 @@ class SessionCard extends Component {
             <span className="mt-4 text-muted font-italic">
               Attendees:{" "}
               {/*This really needed a space. Made it easier to read */}
-              <span>
-                {!this.state.editing ? (
-                  <span>{attendeeCount}</span>
-                ) : (
-                  this.buildAttendeeEditField()
-                )}
-              </span>
+              <span>{attendeeCount}</span>
             </span>
           </div>
           <div className="col col-2 text-secondary">
