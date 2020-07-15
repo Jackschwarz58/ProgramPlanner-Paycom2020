@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom"; //To connect to other pages in the app
 import {
   getUserSessions,
-  getAllSessions,
   addSession,
+  addRelationship,
   editSession,
   deleteSession,
   checkLogin,
@@ -16,62 +16,37 @@ import {
 } from "../helper";
 
 class DashboardApp extends Component {
-  state = { error: null, sessions: [], toLogin: false, showModal: false };
+  state = { sessions: [], toLogin: false, showModal: false };
 
   componentDidMount() {
-    getAllSessions();
-    checkLogin()
-      .then((status) => {
-        if (status === 201) {
-          this.updateSessionData();
-        } else {
-          this.setState({ toLogin: true }); //Set redirect flag
-        }
-      })
-      .catch((e) => {
-        this.setState({ error: e }, () => {
-          window.alert(e + " \n" + e.response.statusText);
-        });
-      });
+    checkLogin().then((status) => {
+      if (status === 201) {
+        this.updateSessionData();
+      } else {
+        this.setState({ toLogin: true }); //Set redirect flag
+      }
+    });
   }
 
   updateSessionData = () => {
-    getUserSessions()
-      .then(({ data }) => {
-        if (!data.length == 0) {
-          data.sort((a, b) => (a.sessionTime > b.sessionTime ? 1 : -1));
-        }
-        this.setState({ sessions: data });
-      })
-      .catch((e) => {
-        this.setState({ error: e }, () => {
-          window.alert(e);
-        });
-      });
+    getUserSessions().then(({ data }) => {
+      if (!data.length == 0) {
+        data.sort((a, b) => (a.sessionTime > b.sessionTime ? 1 : -1));
+      }
+      this.setState({ sessions: data });
+    });
   };
 
   handleDelete = (id) => {
-    deleteSession(id)
-      .then(() => {
-        this.updateSessionData();
-      })
-      .catch((e) => {
-        this.setState({ error: e }, () => {
-          window.alert(e + " \n" + e.response.statusText);
-        });
-      });
+    deleteSession(id).then(() => {
+      this.updateSessionData();
+    });
   };
 
   handleNewSession = () => {
-    addSession()
-      .then(() => {
-        this.updateSessionData();
-      })
-      .catch((e) => {
-        this.setState({ error: e }, () => {
-          window.alert(e + " \n" + e.response.statusText);
-        });
-      });
+    addSession().then(() => {
+      this.updateSessionData();
+    });
   };
 
   handleEdit = (id) => {
@@ -79,65 +54,47 @@ class DashboardApp extends Component {
       return s.sessionId === id;
     });
 
-    editSession(sessionToEdit).catch((e) => {
-      this.setState({ error: e }, () => {
-        window.alert(e + " \n" + e.response.statusText);
-      });
+    editSession(sessionToEdit);
+  };
+
+  handleLogout = () => {
+    updateLogin("LOGOUT", {}).then(({ status, statusText }) => {
+      if (status === 203) {
+        this.setState({ toLogin: true }); //Set redirect flag
+      } else {
+        window.alert("Something Went Wrong :(\n" + status + " \n" + statusText);
+      }
+    });
+  };
+
+  handleJoinSession = (id) => {
+    addRelationship(id).then(() => {
+      this.updateSessionData();
     });
   };
 
   handleFieldChange = (e, id) => {
-    const { name, value } = e.target;
-
     const index = this.state.sessions.findIndex((s) => {
       return s.sessionId === id;
     });
 
     const sessions = [...this.state.sessions];
-    const item = {
-      ...sessions[index],
-      [name]: value,
-    };
+    var item;
+
+    if (e instanceof Date) {
+      item = {
+        ...sessions[index],
+        sessionTime: e.getTime(),
+      };
+    } else {
+      item = {
+        ...sessions[index],
+        [e.target.name]: e.target.value,
+      };
+    }
 
     sessions[index] = item;
     this.setState({ sessions });
-  };
-
-  handleLogout = () => {
-    updateLogin("LOGOUT", {})
-      .then(({ status, statusText }) => {
-        if (status === 203) {
-          this.setState({ toLogin: true }); //Set redirect flag
-        } else {
-          window.alert(
-            "Something Went Wrong :(\n" + status + " \n" + statusText
-          );
-        }
-      })
-      .catch((e) => {
-        this.setState({ error: e }, () => {
-          window.alert(e + " \n" + e.response.statusText);
-        });
-      });
-  };
-
-  handleDateChange = (dateVal, id) => {
-    console.log(dateVal.getTime() / 1000);
-    const index = this.state.sessions.findIndex((s) => {
-      return s.sessionId === id;
-    });
-
-    const sessions = [...this.state.sessions];
-    const item = {
-      ...sessions[index],
-      sessionTime: dateVal.getTime(),
-    };
-    sessions[index] = item;
-    this.setState({ sessions });
-  };
-
-  handleJoinSession = (id) => {
-    console.log("Session Selected: " + id);
   };
 
   render() {
@@ -160,7 +117,6 @@ class DashboardApp extends Component {
               sessions={this.state.sessions}
               onDelete={this.handleDelete}
               onEdit={this.handleEdit}
-              onDateChange={this.handleDateChange}
               onFieldChange={this.handleFieldChange}
             />
           </div>

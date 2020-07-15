@@ -18,12 +18,6 @@ class SessionCard extends Component {
     this.formatDate = this.formatDate.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.isEditing === true) {
-      this.setState({ editing: true });
-    }
-  }
-
   formatDate() {
     const givenTime = new Date(this.props.dateTime);
     return <span>{format(givenTime, "eeee MMMM do, yyyy 'at' h:mmaaa")}</span>;
@@ -35,7 +29,7 @@ class SessionCard extends Component {
       <DatePicker //I chose a datepicker component as it was the most user friendly way to pick dates and the react-datepicker package is super well done already.
         className="edit-field"
         selected={this.props.dateTime}
-        onChange={(e) => this.props.onDateChange(e, this.props.id)}
+        onChange={(e) => this.props.onFieldChange(e, this.props.id)}
         showTimeSelect
         timeFormat="hh:mm a"
         timeIntervals={15}
@@ -44,6 +38,8 @@ class SessionCard extends Component {
       />
     );
   }
+
+  //Builds Edit Field for Card Title
   buildTitleEditField() {
     return (
       <input
@@ -58,6 +54,7 @@ class SessionCard extends Component {
     );
   }
 
+  //Builds Edit Field for Card Description
   buildDescEditField() {
     return (
       <textarea
