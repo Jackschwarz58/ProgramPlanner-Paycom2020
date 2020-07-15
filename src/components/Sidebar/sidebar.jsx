@@ -52,7 +52,11 @@ class SideBar extends Component {
             {this.buildSessionsList()}
           </ul>
           <div id="btm-container">
-            <button className="w-100 text-left rounded" id="signout-btn">
+            <button
+              className="w-100 text-left rounded"
+              id="signout-btn"
+              onClick={this.props.onLogout}
+            >
               <FontAwesomeIcon icon={faSignOutAlt} />
               &nbsp;Sign Out
             </button>
