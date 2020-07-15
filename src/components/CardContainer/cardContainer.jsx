@@ -5,7 +5,13 @@ import "./cardContainer.css"; //Styling
 //Holds all of the session cards and sets them up within the dashboard
 class CardContainer extends Component {
   render() {
-    const { sessions, onDelete, onEdit, handleFieldChange } = this.props; //To avoid repeated code
+    const {
+      sessions,
+      onDelete,
+      onEdit,
+      onFieldChange,
+      onDateChange,
+    } = this.props; //To avoid repeated code
 
     if (sessions.length === 0) {
       return (
@@ -27,7 +33,8 @@ class CardContainer extends Component {
               attendeeCount={session.sessionAttendees}
               onDelete={onDelete}
               onEdit={onEdit}
-              handleFieldChange={handleFieldChange}
+              onFieldChange={onFieldChange}
+              onDateChange={onDateChange}
               isEditing={
                 session.hasOwnProperty("isEditing") ? session.isEditing : false
               }
