@@ -95,8 +95,8 @@ class SessionCard extends Component {
     const { id, title, desc, attendeeCount, onDelete, onEdit } = this.props; //Avoiding repeated code
 
     return (
-      <div className="container bg-light my-4 p-3 rounded shadow-sm" id={id}>
-        <div className="row">
+      <div className="container bg-light my-4 p-3 rounded shadow-sm">
+        <div className="row anchor" id={id}>
           <div className="col col-10">
             <span>
               <h2>
