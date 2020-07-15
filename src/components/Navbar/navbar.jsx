@@ -16,7 +16,6 @@ class NavBar extends Component {
 
   componentDidMount() {
     getAllSessions().then(({ data }) => {
-      console.log(data);
       this.setState({ sessionList: data });
     });
   }
