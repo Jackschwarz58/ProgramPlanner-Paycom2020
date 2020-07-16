@@ -1,0 +1,53 @@
+#card-edit-field {
+    width: 75%;
+    padding: 0px 8px;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.react-datepicker__input-container {
+    border: 1px solid #e5e5e5;
+    background-color: #ebebeb;
+    border-radius: 5px;
+    padding: 0px 8px;
+}
+
+.react-datepicker__input-container input {
+    background-color: #ebebeb;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+    width: 100%;
+}
+
+.react-datepicker-wrapper, .react-datepicker__input-container {
+    width: 68%;
+}
+
+#card-desc-edit-field {
+    width: 100%;
+    resize: none;
+    padding: 0px 8px;
+}
+
+#card-attendee-edit-field {
+    padding: 0px 8px;
+    width: 8%;
+}
+
+.edit-field {
+    border: 1px solid #e5e5e5;
+    background-color: #ebebeb;
+    border-radius: 5px;
+}
+
+.anchor {
+    padding-top: 96px;
+    margin-top: -96px;
+}
+
+.strikethough-text {
+    text-decoration: line-through;
+}

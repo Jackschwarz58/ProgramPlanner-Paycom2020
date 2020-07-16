@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100vh;
+}
+
+#login-wrapper {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+    url("/paycomProject/assets/img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#login-card {
+  width: 50%;
+}
+
+#login-hero-img {
+  width: 45%;
+  padding: 15px;
+}
+
+@media only screen and (min-width: 1000px) {
+  #login-card {
+    width: 30vw;
+  }
+  #login-hero-img {
+    width: 15vw;
+  }
+}
+
+@media only screen and (min-width: 1370px) {
+  #login-card {
+    width: 25vw;
+  }
+  #login-hero-img {
+    width: 10vw;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #login-card {
+    width: 18vw;
+  }
+}
+
+.login-field-input {
+  width: 100%;
+}
