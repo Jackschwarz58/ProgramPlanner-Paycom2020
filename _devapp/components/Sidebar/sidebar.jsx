@@ -3,6 +3,9 @@ import "./sidebar.css"; //Styling
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //Needed for icons
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"; //For nice buttons
 
+// This code is looking good. It's another example of a class that could be converted into a functional component. 
+// Not necessary of course, but functional components are preferred in React when possible.
+
 //Sidebar on the Dashboard page that displays the brand logo (defined below), the event title, and a list of user sessions ordered by time from the current time.
 class SideBar extends Component {
   //Builds a list of upcoming sessions sorted by date that a user can see. When clicked, it scrolls to that event on the page

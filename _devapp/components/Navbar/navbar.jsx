@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //For nice glyphs on the buttons
 import { faCalendar, faCalendarPlus } from "@fortawesome/free-solid-svg-icons"; //Add session button
 import "./navbar.css"; //Styling
+// ^ Using JSS is a cool alternative to CSS. You are able to contain the styles and jsx code
+// in a single file, and you don't have to worry about classes for styling. Probably a bit
+// beyond the scope for a summer program, though.
 import { getAllSessions } from "../../helper"; //To create the join existing session menu dropdown
 import { format } from "date-fns"; //Nicer Date formatting. Didn't want to use Moment, wayy to big
 

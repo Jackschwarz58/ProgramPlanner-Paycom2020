@@ -30,6 +30,7 @@ if (isset($_POST['loginSubmit'])) { //Makes sure the request is from the correct
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
 
+            // I'd reiterate my point on nesting that I noted in signup.php.
             if ($row = mysqli_fetch_assoc($result)) { //If something was found in the query
 
                 $pwdCheck = password_verify($pwd, $row['pwdUsers']); //Checks pass against hashed pass in the database

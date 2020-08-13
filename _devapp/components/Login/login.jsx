@@ -28,6 +28,8 @@ class Login extends Component {
     });
   };
 
+  // Good job handling input here
+
   //This is the handler for the submit button on the login page
   handleLoginSubmit = (e) => {
     e.preventDefault();

@@ -46,6 +46,9 @@ if (isset($_POST['signupSubmit'])) {
                 $sql = "INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?,?,?)"; //Puts the necessary values into the database
                 $stmt = mysqli_stmt_init($conn);
 
+                // Here we are 5 ifs deep. Usually when going beyond 3 nested ifs, it's a good time to 
+                // think about trying to split off this logic, either in a separate class or in functions.
+                // As an example, according to the Linux kernel conventions, the limit is 3 nested ifs.
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header(SQLERROR);
                     exit();

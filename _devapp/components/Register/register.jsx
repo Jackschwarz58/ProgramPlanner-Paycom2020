@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./register.css";
-import axios from "axios"; //Nicer Fetch Calls
+import axios from "axios"; //Nicer Fetch Calls // This looks like an unused import
 import { Redirect } from "react-router-dom"; //Redirect to other pages in the app
 import { checkLogin, userSignUp } from "../../helper.js"; //User Action for Redux Store
 

@@ -6,9 +6,17 @@ import { faEdit, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons"; //
 import { format } from "date-fns"; //Nicer Date formatting. Didn't want to use Moment, wayy to big
 import "./sessionCard.css"; //Styling
 
+// This class is looking good.
+
 class SessionCard extends Component {
   state = { editing: false, sessionDate: new Date(), sessionId: null }; //Editing flag is used to built editable fields. StartDate needed for datepicker
 
+  // It is possible to do this without multiple bind() calls. You can define your class functions below as arrow methods. 
+  // Then you can use them in your render() using, e.g., this.formatDate(). 
+  // Basically binding is not necessary if you are not using state in your methods, and if you are using state
+  // you can still use arrow functions like this: https://medium.com/@joespinelli_6190/using-arrow-functions-to-avoid-binding-this-in-react-5d7402eec64
+  // However, it is a matter of personal preference, and different developers have different opinions: https://stackoverflow.com/questions/50375440/binding-vs-arrow-function-for-react-onclick-event
+  // The use of arrow functions without bind seems to be more popular since ES6.
   constructor() {
     super();
 

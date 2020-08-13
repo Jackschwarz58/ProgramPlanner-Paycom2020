@@ -142,6 +142,7 @@ class DashboardApp extends Component {
   }
 }
 
+// Nice, I like Redux. 
 //This is for Redux store access
 const mapStateToProps = (state) => {
   return state;
